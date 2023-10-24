@@ -1,0 +1,52 @@
+Hotellet - basics
+
+
+Kund 
+    Kundnummer
+    Förnamn
+    Efternamn
+    Personnummer
+    Adress (gata, postnummer, stad)
+    Telefonnummer
+    E-post
+
+    Ny_Kund()
+    Ta_Bort_Kund()
+    Söka_Kund()
+
+
+Gäst (ärvs från kund)
+    
+Rum
+    rumsnummer
+    antal sängar
+    Typ av säng (Kingsize, queensize, enkel)
+    Handikappanpassning (J/N)
+    Våning?
+
+    Lägga_till_rum()
+    Ta_Bort_Rum()
+    Söka_rum() - sorterat på antal sovplatser
+
+
+Kalender 
+    datum
+
+
+Bokning
+    Kundnummer
+    datum
+    rumsnummer
+
+    Lägga_till_bokning()
+    Ta_Bort_Bokning()
+    Söka_bokning - datum och lediga rum
+
+
+
+    
+
+
+
+
+
