@@ -1,0 +1,56 @@
+using System.Data;
+
+public class CustomerMethods
+{
+    static public void AddCustomer(List<Customer> customers)
+    {
+        // Read the Customer data and add the customer to the list of customers
+        Console.WriteLine("State customer Id ");
+        string custId = Console.ReadLine() +"";
+        Console.WriteLine("State Forename");
+        string fname = Console.ReadLine() + "";
+        Console.WriteLine("State Lastname");
+        string lname = Console.ReadLine() + "";
+        Console.WriteLine("State social security Id");
+        int.TryParse(Console.ReadLine() + "", out int sID);
+        Console.WriteLine("State the customer adress");
+        string adress = Console.ReadLine() + "";
+        Console.WriteLine("State the customer E-mail");
+        string epost = Console.ReadLine() + "";
+        Console.WriteLine("State the customer phone number");
+        string phone = Console.ReadLine() + "";
+        
+        Customer newcustomer = new Customer(custId,fname, lname, sID, adress,epost, phone);
+        customers.Add(newcustomer);
+
+    }
+
+    static public void RemoveCustomer(List<Customer> customers)
+    {
+        // Remove a customer from the list of Customers
+        Console.WriteLine("State the Customer id for the customer to be removed");
+        string custId = Console.ReadLine() +"";
+        customers.RemoveAt(customers.FindIndex(y => y.customerid == custId));
+    }
+
+    static public void FindCustomer(List<Customer> customers)
+    {
+        Console.WriteLine("State the Customer id for the customer you want to view");
+        string custId = Console.ReadLine() +"";
+        int customerIndex = customers.FindIndex(y => y.customerid == custId);
+        if (customerIndex == -1)
+        {
+            Console.WriteLine("Could not find the customer");
+        }
+        else 
+        {
+            Customer mycust = customers[customerIndex];
+            Console.Write($" Customer Id {mycust.customerid} \n");
+            Console.Write($" Customer name {mycust.forename} {mycust.lastname} \n");
+            Console.Write($" Customer adress {mycust.adress} \n");
+            Console.Write($" Customer phone {mycust.phone} \n");
+            Console.WriteLine($"Customer email: {mycust.email}")
+        }
+    } 
+}
+
