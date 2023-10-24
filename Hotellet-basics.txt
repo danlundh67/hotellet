@@ -40,9 +40,11 @@ Bokning
 
     Lägga_till_bokning()
     Ta_Bort_Bokning()
-    Söka_bokning - datum och lediga rum
+    Söka_bokning - datum och lediga rum()
 
-
+Reviews 
+    Kundalias
+    
 
     
 
