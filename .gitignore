@@ -9,3 +9,16 @@ obj/Debug/net7.0/hotellet.AssemblyInfoInputs.cache
 obj/Debug/net7.0/hotellet.assets.cache
 obj/Debug/net7.0/hotellet.GeneratedMSBuildEditorConfig.editorconfig
 obj/Debug/net7.0/hotellet.GlobalUsings.g.cs
+bin/Debug/net7.0/hotellet.deps.json
+bin/Debug/net7.0/hotellet.dll
+bin/Debug/net7.0/hotellet.exe
+bin/Debug/net7.0/hotellet.pdb
+bin/Debug/net7.0/hotellet.runtimeconfig.json
+obj/Debug/net7.0/apphost.exe
+obj/Debug/net7.0/hotellet.csproj.CoreCompileInputs.cache
+obj/Debug/net7.0/hotellet.csproj.FileListAbsolute.txt
+obj/Debug/net7.0/hotellet.dll
+obj/Debug/net7.0/hotellet.genruntimeconfig.cache
+obj/Debug/net7.0/hotellet.pdb
+obj/Debug/net7.0/ref/hotellet.dll
+obj/Debug/net7.0/refint/hotellet.dll
