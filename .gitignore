@@ -1,0 +1,11 @@
+obj/hotellet.csproj.nuget.dgspec.json
+obj/hotellet.csproj.nuget.g.props
+obj/hotellet.csproj.nuget.g.targets
+obj/project.assets.json
+obj/project.nuget.cache
+obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs
+obj/Debug/net7.0/hotellet.AssemblyInfo.cs
+obj/Debug/net7.0/hotellet.AssemblyInfoInputs.cache
+obj/Debug/net7.0/hotellet.assets.cache
+obj/Debug/net7.0/hotellet.GeneratedMSBuildEditorConfig.editorconfig
+obj/Debug/net7.0/hotellet.GlobalUsings.g.cs
