@@ -6,7 +6,7 @@ public class Customer
     private string socialId {set; get;}
     public string adress {set; get;}
     public string email {set; get;}    
-    public string phone;
+    public string phone {set; get;} 
 
 
     public Customer(int cId, string fname, string lname, string sId, string adr, string epost, string phonenr)
