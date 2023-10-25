@@ -10,11 +10,11 @@ class RoomMethods
         System.Console.WriteLine("Please state the number of beds that you want to add");
         int tempNrBeds = int.Parse(""+ Console.ReadLine());
         System.Console.WriteLine("Please state if you the room has handicap accesability (Yes/No)");
-        bool tempHcp = Console.ReadLine().Equals("Yes");
+        bool tempHcp = Console.ReadLine().ToLower().Equals("yes");
         System.Console.WriteLine("Please state if you the room is silent (Yes/No)");
-        bool tempSilent = Console.ReadLine().Equals("Yes");
+        bool tempSilent = Console.ReadLine().ToLower().Equals("yes");
         System.Console.WriteLine("Please state if you the room is a family room (Yes/No)");
-        bool tempFamily = Console.ReadLine().Equals("Yes");
+        bool tempFamily = Console.ReadLine().ToLower().Equals("yes");
         System.Console.WriteLine("Please state bed model (Kingsize, Queensize, Single, Double, Sofabed or Cribs)");
         if (Enum.TryParse(typeof(Diffbeds), Console.ReadLine(), out object tempBedObj))
         {
@@ -55,7 +55,7 @@ class RoomMethods
     }
     static void FindRoom(List<Room>rooms)
     {
-
+        
     }
     
     public static void PrintRooms(List<Room>rooms)

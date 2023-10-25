@@ -1,4 +1,4 @@
-class Room
+public class Room
 {
     
 
