@@ -12,6 +12,7 @@ class Program
         
         RoomMethods.AddRoom(roomslist);
         RoomMethods.PrintRooms(roomslist);
+        RoomMethods.FindRoom(roomslist);
 
 
 
