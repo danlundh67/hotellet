@@ -17,14 +17,16 @@ class Program
         mycust = new Customer(2,"Eva","Ericsson", "19890517-1345","Bagarevägen 2 42, 54120 Moholm","eva.ericsson@gmail.com","0501-317823");
         customers.Add(mycust);
         
-        RoomMethods.PrintRooms(roomslist);
+        /*RoomMethods.PrintRooms(roomslist);
         // RoomMethods.RemoveRoom(roomslist);
         RoomMethods.PrintRooms(roomslist);
         CustomerMethods.PrintCustomer(customers);
         //CustomerMethods.RemoveCustomer(customers);
         //CustomerMethods.FindCustomer(customers);
         CustomerMethods.AddCustomer(customers);
-        CustomerMethods.PrintCustomer(customers);
+        CustomerMethods.PrintCustomer(customers);*/
+        RoomMethods.AddRoom(roomslist);
+        RoomMethods.PrintRooms(roomslist);
 
 
 

@@ -2,8 +2,37 @@ class RoomMethods
 {
 
     
-    static void AddRoom(List<Room>rooms)
-    {
+    public static void AddRoom(List<Room>rooms)
+    {   
+        //skriv ut rum som finns!
+        System.Console.WriteLine("Please state the room number that you want to add");
+        int tempRoomNr = int.Parse(""+ Console.ReadLine());
+        System.Console.WriteLine("Please state the number of beds that you want to add");
+        int tempNrBeds = int.Parse(""+ Console.ReadLine());
+        System.Console.WriteLine("Please state if you the room has handicap accesability (Yes/No)");
+        bool tempHcp = Console.ReadLine().Equals("Yes");
+        System.Console.WriteLine("Please state if you the room is silent (Yes/No)");
+        bool tempSilent = Console.ReadLine().Equals("Yes");
+        System.Console.WriteLine("Please state if you the room is a family room (Yes/No)");
+        bool tempFamily = Console.ReadLine().Equals("Yes");
+        System.Console.WriteLine("Please state bed model (Kingsize, Queensize, Single, Double, Sofabed or Cribs)");
+        if (Enum.TryParse(typeof(Diffbeds), Console.ReadLine(), out object tempBedObj))
+        {
+            if (tempBedObj is Diffbeds)
+            {
+            Diffbeds tempBed = (Diffbeds)tempBedObj;
+            Room addRoom = new Room(tempRoomNr, tempNrBeds, tempHcp, tempSilent, tempFamily, tempBed);
+            rooms.Add(addRoom);
+            }
+            else
+            {
+            System.Console.WriteLine("Invalid bed model. The room was not added.");
+            }
+        }
+        else
+        {
+        System.Console.WriteLine("Invalid bed model. The room was not added.");
+        }
 
     }
     public static void RemoveRoom(List<Room>rooms)
@@ -28,10 +57,7 @@ class RoomMethods
     {
 
     }
-    static void AvailableRooms(List<Room>rooms/*, List<Bookings>bookings*/)
-    {
-
-    }
+    
     public static void PrintRooms(List<Room>rooms)
     {
         for (int i = 0; i < rooms.Count; i++)

@@ -2,12 +2,12 @@ class Room
 {
     
 
-     public int RoomNr {get; set;}
-     public int NrOfBeds {get; set;}
-     public bool Hcp {get; set;}
-     public bool SilentRoom {get; set;}
-     public bool FamilyRoom {get; set;}
-     public Diffbeds Diffbeds {get; set;}
+     public int RoomNr {set; get;}
+     public int NrOfBeds {set; get;}
+     public bool Hcp {set; get;}
+     public bool SilentRoom {set; get;}
+     public bool FamilyRoom {set; get;}
+     public Diffbeds Diffbeds {set; get;}
 
      public Room (int roomNr, int nrOfBeds, bool hcp, bool silentRoom, bool familyRoom, Diffbeds diffbeds)
      {
@@ -19,7 +19,7 @@ class Room
         this.Diffbeds = diffbeds;
      }
 }
-enum Diffbeds
+public enum Diffbeds
     {
         Kingsize,
         Queensize,
