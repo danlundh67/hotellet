@@ -8,9 +8,11 @@ class Program
     
     static void Main(string[] args)
     {
-        TestMethods.TestMethod(customers, roomslist);
-        AddBooking
-        RoomMethods.PrintRooms(roomslist);
+        TestMethods.TestMethod(customers, roomslist, bookings);
+        //BookingMethods.AddBooking(bookings, roomslist);
+        //BookingMethods.PrintBooking(bookings, customers);
+        BookingMethods.AvailableRooms(roomslist, bookings);
+
         
 
 

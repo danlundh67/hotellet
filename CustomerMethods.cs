@@ -59,7 +59,25 @@ public class CustomerMethods
             Console.Write($" Customer phone {mycust.phone} \n");
             Console.WriteLine($" Customer email: {mycust.email}");
         }
-    } 
+    }
+    static public void FindCustomer(List<Customer> customers, int custId)
+    {
+        
+        int customerIndex = customers.FindIndex(y => y.customerid == custId);
+        if (customerIndex == -1)
+        {
+            Console.WriteLine("Could not find the customer");
+        }
+        else 
+        {
+            Customer mycust = customers[customerIndex];
+            Console.Write($" Customer Id {mycust.customerid} \n");
+            Console.Write($" Customer name {mycust.forename} {mycust.lastname} \n");
+            Console.Write($" Customer adress {mycust.adress} \n");
+            Console.Write($" Customer phone {mycust.phone} \n");
+            Console.WriteLine($" Customer email: {mycust.email}");
+        }
+    }  
 
     static public void PrintCustomer(List<Customer> customers)
     {
