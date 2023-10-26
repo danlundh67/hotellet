@@ -6,12 +6,18 @@ class Program
     public static List<Customer> customers = new List<Customer>();
     public static List<Bookings> bookings = new List<Bookings>();
     
+    public static List<CustomerReview> reviewlist = new List<CustomerReview>();
+
     static void Main(string[] args)
     {
-        TestMethods.TestMethod(customers, roomslist, bookings);
+        TestMethods.TestMethod(customers, roomslist, bookings, reviewlist);
         //BookingMethods.AddBooking(bookings, roomslist);
         //BookingMethods.PrintBooking(bookings, customers);
-        BookingMethods.AvailableRooms(roomslist, bookings);
+        //BookingMethods.AvailableRooms(roomslist, bookings);
+        ReviewMethods.PrintReviews(reviewlist);
+        ReviewMethods.AddReview(1,reviewlist);
+        ReviewMethods.AddReview(2,reviewlist);
+        ReviewMethods.PrintReviews(reviewlist);
 
         
 

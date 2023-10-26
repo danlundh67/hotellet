@@ -1,19 +1,29 @@
 public class CustomerReview {
 
-    string aliasCustomer;
-    DateOnly datereview;
+    public string aliasCustomer {set; get;}
+    public DateOnly datereview {set; get;}
 
-    string freeText;
+    public string freeText {set; get;}
 
-    int rating;
+    public Ratings rating {set; get;}
 
-    public CustomerReview(string alias, DateOnly date, string text, int rate)
+    public int customerid {set; get;}
+
+    public CustomerReview(string alias, DateOnly date, string text, Ratings rate, int cid)
     {
         aliasCustomer=alias;
         datereview=date;
         freeText=text;
         rating = rate;
+        customerid = cid;
     }
-
 }
 
+public enum Ratings
+{
+    Lousy = 1,
+    Poor = 2,
+    Moderate = 3,
+    Fair = 4,
+    Excellent = 5
+}

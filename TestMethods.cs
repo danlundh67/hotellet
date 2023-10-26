@@ -1,7 +1,7 @@
 public class TestMethods
 {
 
-    public static void TestMethod(List<Customer> customers, List<Room>roomslist,List<Bookings>bookings)
+    public static void TestMethod(List<Customer> customers, List<Room>roomslist,List<Bookings>bookings, List<CustomerReview>reviewlist)
     {
 
         Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
@@ -24,6 +24,9 @@ public class TestMethods
         DateOnly date4 = new DateOnly (2001,01,12);
         booktest1 = new Bookings(101, date3, date4, 1, false, "74554541",customerRooms );
         bookings.Add(booktest1);
+        CustomerReview myreview = new CustomerReview("Missnöjd", date3, "Uruselt hotel, personalen sjöng hela tiden.", Ratings.Lousy, 1);
+        reviewlist.Add(myreview);
+
         
     }
 }
