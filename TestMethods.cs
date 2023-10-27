@@ -22,7 +22,7 @@ public class TestMethods
         bookings.Add(booktest1);
         DateOnly date3 = new DateOnly (2001,01,08);
         DateOnly date4 = new DateOnly (2001,01,12);
-        booktest1 = new Bookings(101, date3, date4, 1, false, "74554541",customerRooms );
+        booktest1 = new Bookings(101, date3, date4, 2, false, "74554541",customerRooms );
         bookings.Add(booktest1);
         CustomerReview myreview = new CustomerReview("Miss_nöjd", date3, "Uruselt hotel, personalen sjöng hela tiden.", Ratings.Lousy, 1);
         reviewlist.Add(myreview);

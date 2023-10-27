@@ -53,9 +53,31 @@ public static void AddBooking(List<Bookings>bookings, List<Room>rooms)
 
     
 }
-static void RemoveBooking(List<Bookings>bookings)
+public static void RemoveBooking(List<Bookings>bookings, List<Customer>customers)
 {
+    Console.WriteLine("Active bookings");
+    for (int i = 0; i < bookings.Count; i++)
+    {
+        Customer customer = customers.FirstOrDefault(cust => cust.customerid == bookings[i].customerid)!; // Find the customer associated with the booking using customerid
 
+        if (customer != null)
+        {
+            Console.WriteLine($"{i + 1}. Booking ID: {bookings[i].BookingId} | Customer: {customer.forename} {customer.lastname}");
+        }
+        else
+        {
+            Console.WriteLine($"{i + 1}. Booking ID: {bookings[i].BookingId} | Customer not found");
+        }
+
+        Console.WriteLine("------------------------------------");
+    }
+    Console.Write("Choose the booking that you want to remove: "); 
+    int removeABooking = int.Parse("" + Console.ReadLine()) - 1; // Read the user's input as a string and convert it to an int.
+    if (removeABooking >= 0 && removeABooking < bookings.Count)
+    {
+        bookings.RemoveAt(removeABooking); // Remove the selected booking from the list.
+        Console.WriteLine($"The selected booking has been removed");
+    }
 }
 public static bool FindBooking(List<Bookings>bookings, int RoomNr, DateOnly CustIn, DateOnly CustOut)
 {
@@ -94,17 +116,20 @@ public static void PrintBooking(List<Bookings>bookings, List<Customer>customers)
     foreach (Bookings b in bookings)
     {
         string checkedInOut = b.CheckedInOut ? "Yes" : "No";
-        Console.WriteLine($"Booking ID: {b.BookingId}| ");
+        Console.WriteLine("------------------------");
+        Console.WriteLine($"|  Booking ID: {b.BookingId}  |");
+        Console.WriteLine("------------------------");
         CustomerMethods.FindCustomer(customers, b.customerid);
-        Console.WriteLine($"Date to check in: {b.DateIn}");
-        Console.WriteLine($"Date to check out : {b.DateOut}");
-        Console.WriteLine($"Customer Checked in ?: {checkedInOut}");
+        Console.WriteLine($" -> Date to check in: {b.DateIn}");
+        Console.WriteLine($" <- Date to check out: {b.DateOut}");
+        Console.WriteLine($" - Customer Checked in ?: {checkedInOut}");
         
         foreach(Room c in b.Bookedrooms)
         {
-            Console.WriteLine($"Number of beds: {c.NrOfBeds}");
+            Console.WriteLine($" - Number of beds: {c.NrOfBeds}");
         }
-        Console.WriteLine($"Booked rooms: {b.Bookedrooms.Count()}");
+        Console.WriteLine($" - Booked rooms: {b.Bookedrooms.Count()}");
+        Console.WriteLine("------------------------");
 
     }
 }

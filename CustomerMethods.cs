@@ -71,11 +71,11 @@ public class CustomerMethods
         else 
         {
             Customer mycust = customers[customerIndex];
-            Console.Write($" Customer Id {mycust.customerid} \n");
-            Console.Write($" Customer name {mycust.forename} {mycust.lastname} \n");
-            Console.Write($" Customer adress {mycust.adress} \n");
-            Console.Write($" Customer phone {mycust.phone} \n");
-            Console.WriteLine($" Customer email: {mycust.email}");
+            Console.Write($" - Customer Id: {mycust.customerid} \n");
+            Console.Write($" - Customer name: {mycust.forename} {mycust.lastname} \n");
+            Console.Write($" - Customer adress: {mycust.adress} \n");
+            Console.Write($" - Customer phone: {mycust.phone} \n");
+            Console.WriteLine($" - Customer email: {mycust.email}");
         }
     }  
 

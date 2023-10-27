@@ -13,11 +13,7 @@ class Program
         TestMethods.TestMethod(customers, roomslist, bookings, reviewlist);
         //BookingMethods.AddBooking(bookings, roomslist);
         //BookingMethods.PrintBooking(bookings, customers);
-        //BookingMethods.AvailableRooms(roomslist, bookings);
-        ReviewMethods.PrintReviews(reviewlist);
-        ReviewMethods.AddReview(1,reviewlist);
-        ReviewMethods.AddReview(2,reviewlist);
-        ReviewMethods.PrintReviews(reviewlist);
+        BookingMethods.AvailableRooms(roomslist, bookings);
 
         
 
