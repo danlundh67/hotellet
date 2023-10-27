@@ -42,18 +42,25 @@ public class ReviewMethods
 
     }
 
-    static void Sortreview()
+    static void Sortreview(List<CustomerReview> originalList)
     {
+        originalList = SortByRating(originalList);
+    }
 
+    public static List<CustomerReview> SortByRating(List<CustomerReview> originalList)
+    {
+        return originalList.OrderBy(x => x.rating).ToList();
     }
 
     public static void PrintReviews(List<CustomerReview> listReviews)
     {
         int sum = 0;
+        List<CustomerReview> sortReviews = new List<CustomerReview>();
+        sortReviews = SortByRating(listReviews);
         Console.WriteLine("---------------------------------------------------");
         Console.WriteLine("             Hotel reviews");
          Console.WriteLine("---------------------------------------------------");
-        foreach (CustomerReview a in listReviews)
+        foreach (CustomerReview a in sortReviews)
         {
             Console.WriteLine($" {a.aliasCustomer} {a.datereview} ");
             Console.WriteLine($" Ratting: {a.rating}");
@@ -65,4 +72,6 @@ public class ReviewMethods
         Console.WriteLine($"Average rating {avg}");
 
     }
+
+    
 }
