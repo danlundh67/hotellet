@@ -107,13 +107,15 @@ public static bool FindBooking(List<Bookings>bookings, int RoomNr, DateOnly Cust
     return available;
         
 }
-static void SortBooking(List<Bookings>bookings)
+public static List<Bookings> SortBooking(List<Bookings>bookings)
 {
-
+    return bookings.OrderBy(x => x.DateIn).ToList();
 }
 public static void PrintBooking(List<Bookings>bookings, List<Customer>customers)
 {
-    foreach (Bookings b in bookings)
+    List<Bookings> sortBookings = new List<Bookings>();
+    sortBookings = SortBooking(bookings);
+    foreach (Bookings b in sortBookings)
     {
         string checkedInOut = b.CheckedInOut ? "Yes" : "No";
         Console.WriteLine("------------------------");
