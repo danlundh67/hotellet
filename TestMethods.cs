@@ -26,6 +26,10 @@ public class TestMethods
         bookings.Add(booktest1);
         CustomerReview myreview = new CustomerReview("Miss_nöjd", date3, "Uruselt hotel, personalen sjöng hela tiden.", Ratings.Lousy, 1);
         reviewlist.Add(myreview);
+        myreview = new CustomerReview("Miss_nöjd", date4, "Personalen har slutat sjunga!", Ratings.Moderate, 1);
+        reviewlist.Add(myreview);
+        myreview = new CustomerReview("Globetrotter", date1, "Bra service, rekommenderas", Ratings.Excellent, 2);
+        reviewlist.Add(myreview);
 
         
     }

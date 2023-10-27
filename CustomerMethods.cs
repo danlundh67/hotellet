@@ -60,6 +60,46 @@ public class CustomerMethods
             Console.WriteLine($" Customer email: {mycust.email}");
         }
     }
+
+    public static int findMyId(List<Customer> customers)
+    {
+        List<Customer> myCust = new List<Customer>();
+        Console.WriteLine("State the lastname:");
+        string lname = Console.ReadLine() + "";
+        myCust = customers.Where(x => x.lastname == lname).ToList();
+        PrintCustomer(myCust);
+        if (myCust.Count()== 1)
+        {
+            return myCust[0].customerid;
+        }
+        else 
+        {
+            Console.WriteLine("State email:");
+            string email = Console.ReadLine() + "";
+            myCust = myCust.Where(x => x.email == email).ToList();
+            PrintCustomer(myCust);
+            if (myCust.Count() == 1)
+            {
+                return myCust[0].customerid;
+            }
+            else{
+                Console.WriteLine("State email:");
+                string epost = Console.ReadLine() + "";
+                myCust = myCust.Where(x => x.email == epost).ToList();
+                PrintCustomer(myCust);
+                if (myCust.Count() == 1)
+                {
+                    return myCust[0].customerid;
+                }
+                else 
+                {
+                    return -1;
+                }
+            }
+
+        }
+
+    }
     static public void FindCustomer(List<Customer> customers, int custId)
     {
         

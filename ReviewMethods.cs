@@ -37,9 +37,16 @@ public class ReviewMethods
 
     }
 
-    static void RemoveReview()
+    public static void RemoveReview(int custId, List<CustomerReview> listreviews)
     {
 
+        List<CustomerReview> myReviews = new List<CustomerReview>();
+        myReviews = listreviews.Where(x => x.customerid == custId).ToList();
+        PrintReviews(myReviews);
+        Console.WriteLine("State the date for the review you want to remove: ");
+        DateOnly dateOut = DateOnly.Parse(""+ Console.ReadLine());
+        int removeIndex = listreviews.FindIndex(y => y.customerid == custId && y.datereview ==dateOut);
+        listreviews.RemoveAt(removeIndex);
     }
 
     static void Sortreview(List<CustomerReview> originalList)
@@ -74,5 +81,8 @@ public class ReviewMethods
 
     }
 
-    
+    public static void PrintSumReviews(List<CustomerReview> listReviews)
+    {
+        //listReviews.OrderBy(x => x.)
+    }
 }
