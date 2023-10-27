@@ -57,6 +57,7 @@ public class ReviewMethods
         int sum = 0;
         List<CustomerReview> sortReviews = new List<CustomerReview>();
         sortReviews = SortByRating(listReviews);
+        sortReviews.Reverse();
         Console.WriteLine("---------------------------------------------------");
         Console.WriteLine("             Hotel reviews");
          Console.WriteLine("---------------------------------------------------");
