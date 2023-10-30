@@ -58,7 +58,7 @@ public static void RemoveBooking(List<Bookings>bookings, List<Customer>customers
     Console.WriteLine("Active bookings");
     for (int i = 0; i < bookings.Count; i++)
     {
-        Customer customer = customers.FirstOrDefault(cust => cust.customerid == bookings[i].customerid)!; // Find the customer associated with the booking using customerid
+        Customer customer = customers.FirstOrDefault(cust => cust.customerid == bookings[i].Customerid)!; // Find the customer associated with the booking using customerid
 
         if (customer != null)
         {
@@ -121,7 +121,7 @@ public static void PrintBooking(List<Bookings>bookings, List<Customer>customers)
         Console.WriteLine("------------------------");
         Console.WriteLine($"|  Booking ID: {b.BookingId}  |");
         Console.WriteLine("------------------------");
-        CustomerMethods.FindCustomer(customers, b.customerid);
+        CustomerMethods.FindCustomer(customers, b.Customerid);
         Console.WriteLine($" -> Date to check in: {b.DateIn}");
         Console.WriteLine($" <- Date to check out: {b.DateOut}");
         Console.WriteLine($" - Customer Checked in ?: {checkedInOut}");

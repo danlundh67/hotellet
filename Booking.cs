@@ -1,5 +1,5 @@
 
-public class Bookings : Customer
+public class Bookings
 {
     
     public int BookingId {set; get;}
@@ -8,8 +8,9 @@ public class Bookings : Customer
     public bool CheckedInOut {set; get;}
     private string CreditCardNr {set; get;}
     public List<Room> Bookedrooms {set; get;}
+    public int Customerid {set; get;}
     
-    public Bookings (int bookingId, DateOnly dateIn, DateOnly dateOut, int customerid, bool checkedInOut, string creditCardNr, List<Room>bookedrooms) : base ()
+    public Bookings (int bookingId, DateOnly dateIn, DateOnly dateOut, int customerid, bool checkedInOut, string creditCardNr, List<Room>bookedrooms) 
     {
         BookingId = bookingId;
         DateIn = dateIn;
@@ -17,7 +18,8 @@ public class Bookings : Customer
         CheckedInOut = checkedInOut;
         CreditCardNr = creditCardNr;
         Bookedrooms = bookedrooms;
-        this.customerid = customerid;
+        this.Customerid = customerid;
+        
 
     }
 }
