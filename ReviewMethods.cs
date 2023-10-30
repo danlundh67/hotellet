@@ -49,10 +49,6 @@ public class ReviewMethods
         listreviews.RemoveAt(removeIndex);
     }
 
-    static void Sortreview(List<CustomerReview> originalList)
-    {
-        originalList = SortByRating(originalList);
-    }
 
     public static List<CustomerReview> SortByRating(List<CustomerReview> originalList)
     {

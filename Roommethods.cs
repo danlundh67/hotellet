@@ -10,7 +10,7 @@ class RoomMethods
         System.Console.Write("Please state the number of beds that you want to add: ");
         int tempNrBeds = int.Parse(""+ Console.ReadLine());
         System.Console.Write("Please state if you the room has handicap accesability (Yes/No): ");
-        bool tempHcp = Console.ReadLine().ToLower().Equals("yes");
+        bool tempHcp = Console.ReadLine().ToLower().Equals("yes"); //if the input yes/yes the bool is set to true. Otherwise its False
         System.Console.Write("Please state if you the room is silent (Yes/No): ");
         bool tempSilent = Console.ReadLine().ToLower().Equals("yes");
         System.Console.Write("Please state if you the room is a family room (Yes/No): ");
@@ -84,6 +84,7 @@ class RoomMethods
     {
         for (int i = 0; i < rooms.Count; i++)
         {   // Use a ternary operator to display "Yes" or "No" instead of true/false for certain properties.
+            // If rooms[i].Hcp is true, set hcpRoom to "Yes"; otherwise, set it to "No".
             string hcpRoom = rooms[i].Hcp ? "Yes" : "No";
             string silentR = rooms[i].SilentRoom ? "Yes" : "No";
             string familyR = rooms[i].FamilyRoom ? "Yes" : "No";

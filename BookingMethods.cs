@@ -10,7 +10,7 @@ public static void AvailableRooms(List<Room>rooms,List<Bookings>bookings)
     foreach (Room a in rooms)
     {
         Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds}|");
-        if(FindBooking(bookings, a.RoomNr, CustIn, CustOut))
+        if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
         {
             Console.WriteLine(" Available!");
         }
@@ -45,8 +45,8 @@ public static void AddBooking(List<Bookings>bookings, List<Room>rooms)
     System.Console.WriteLine("Creditcard number");
     string creditC = Console.ReadLine();
 
-    Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
-    customerrooms.Add(room);
+    //Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
+    //customerrooms.Add(room);
     Bookings bookings1 = new Bookings(bookId, dateIn, dateOut, custId, tempChecked, creditC, customerrooms);
     bookings.Add(bookings1);
 

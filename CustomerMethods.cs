@@ -61,7 +61,7 @@ public class CustomerMethods
         }
     }
 
-    public static int findMyId(List<Customer> customers)
+    public static int FindMyId(List<Customer> customers)
     {
         List<Customer> myCust = new List<Customer>();
         Console.WriteLine("State the lastname:");
