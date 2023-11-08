@@ -2,133 +2,202 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/*public class Menu 
+public class Menu
 {
-    private int SelectedIndex;
-    private string[]? Options;
-    private string? Prompt;
-    private bool[] Action;
+    public static List<Room> roomslist = new List<Room>();
+    public static List<Customer> customers = new List<Customer>();
+    public static List<Bookings> bookings = new List<Bookings>();
+    
+    public static List<CustomerReview> reviewlist = new List<CustomerReview>();
+    public static void RunStartMenu()
+    {
+        string[] menuOptions = { "Staff Menu", "Customer menu", "Exit" };
+        int selectedIndex = 0;
 
-    public Menu (string prompt, string[] options, bool[] action  )
-    {
-        Prompt = prompt;
-        Options = options;
-        Action = action;
-        SelectedIndex = 0;
-    }
-    private void DisplayOptions()
-    {
-        System.Console.WriteLine(Prompt);
-        for (int i = 0; i < Options?.Length; i++)
+        while (true)
         {
-            string currentOption = Options[i];
-            string prefix;
-            if (i == SelectedIndex)
+            Console.Clear(); // Clear the console only when necessary
+
+            Console.WriteLine("Main Menu:");
+            for (int i = 0; i < menuOptions.Length; i++)
             {
-                prefix = " -> ";
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.BackgroundColor = ConsoleColor.Blue;
+                string prefix = (i == selectedIndex) ? "> " : "  ";
+                Console.WriteLine($"{prefix}{menuOptions[i]}");
             }
-            else
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
             {
-                prefix = "   ";
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.BackgroundColor = ConsoleColor.Black;
+                selectedIndex--;
             }
-            System.Console.WriteLine($"{prefix} {currentOption} ");
-        } Console.ResetColor();
-    }
-    public int Run(bool clearScreen)
-    {
-        ConsoleKey keyPressed;
-        do
-        {
-            if (!Action[SelectedIndex])
+            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
             {
-                Console.Clear(); 
+                selectedIndex++;
             }
-            
-            DisplayOptions();
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-            keyPressed = keyInfo.Key;
-            if (keyPressed == ConsoleKey.UpArrow)
+            else if (keyInfo.Key == ConsoleKey.Enter)
             {
-                SelectedIndex--;
-                if (SelectedIndex == -1)
+                if (selectedIndex == menuOptions.Length - 1)
                 {
-                    SelectedIndex = Options.Length -1;
+                    break; 
                 }
 
+                
+                HandleMenuOptionStart(menuOptions[selectedIndex]);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
-            else if (keyPressed == ConsoleKey.DownArrow)
-            {
-                SelectedIndex++;
-                if (SelectedIndex == Options.Length)
-                {
-                    SelectedIndex = 0; 
-                }
-            }
-
-        }while (keyPressed != ConsoleKey.Enter);
-        return SelectedIndex;
+        }
     }
-    /*public int StaffMenu(List<Customer>customers, List<Room>rooms, List<Bookings>bookings)
+
+    public static void HandleMenuOptionStart(string selectedOption)
     {
-        bool exitStaffMenu = false;
-        do
-        {   
+        Console.Clear();
+        Console.WriteLine($"You selected: {selectedOption}");
+        
+        if (selectedOption == "Staff Menu")
+        {
             
-            Menu StaffMenu = new Menu("Staff Menu", new string[] { "Room Menu", "Exit" }, new bool[] { false, false });
-            int selectedIndex = StaffMenu.Run(true);
-
-            switch (selectedIndex)
-            {
-                case 0:
-                    StaffMenu.RoomMenu(customers, rooms, bookings);
-                    break;
-                case 1:
-                    Run run = new Run();
-                    run.MainRun();
-                    exitStaffMenu = true;
-                    break;
-               
-
-            }
-        } while (!exitStaffMenu);
-        return SelectedIndex;
+            RunStaffMenu();
+        }
+        else if (selectedOption == "Customer Menu")
+        {
+            
+            RoomMethods.RemoveRoom(roomslist);
+        }
         
+        
+
+
     }
-    public int RoomMenu(List<Customer>customers, List<Room>rooms, List<Bookings>bookings)
+
+    public static void RunStaffMenu()
     {
-        bool exitStaffMenu = false;
-        do
-        {   
-            bool[] RoomMenuIsAction = { false, false, true, true, false };
-            Menu RoomMenu = new Menu("Room Menu", new string[] { "Add Room", "Remove Room", "Find Room", "Print Room", "Exit"}, RoomMenuIsAction);
-            int selectedIndex = RoomMenu.Run(true);
+        string[] menuOptions = { "Room utility", "Customer utility", "Booking utility","Review utility", "Exit" };
+        int selectedIndex = 0;
 
-            switch (selectedIndex)
+        while (true)
+        {
+            Console.Clear(); 
+
+            Console.WriteLine("Staff Menu:");
+            for (int i = 0; i < menuOptions.Length; i++)
             {
-                case 0:
-                    RoomMethods.AddRoom(rooms);
-                    break;
-                case 1:
-                    RoomMethods.RemoveRoom(rooms);
-                    break;
-                case 2:
-                    RoomMethods.FindRoom(rooms);
-                    break;
-                case 3:
-                    RoomMethods.PrintRooms(rooms);
-                    break;
-                case 4:
-                    RoomMenu.StaffMenu(customers, rooms, bookings);
-                    exitStaffMenu = true;
-                    break;
-                   
+                string prefix = (i == selectedIndex) ? "> " : "  ";
+                Console.WriteLine($"{prefix}{menuOptions[i]}");
             }
-        } while (!exitStaffMenu);
-        return SelectedIndex;
-        
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
+            {
+                selectedIndex--;
+            }
+            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
+            {
+                selectedIndex++;
+            }
+            else if (keyInfo.Key == ConsoleKey.Enter)
+            {
+                if (selectedIndex == menuOptions.Length - 1)
+                {
+                    break; 
+                }
+
+                
+                HandleMenuOptionStaff(menuOptions[selectedIndex]);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
     }
-}*/
+
+    public static void HandleMenuOptionStaff(string selectedOption)
+    {
+        Console.Clear();
+        Console.WriteLine($"You selected: {selectedOption}");
+        
+        if (selectedOption == "Room utility")
+        {
+            RunRoomMenu(roomslist);
+        }
+        else if (selectedOption == "Customer Menu")
+        {
+            
+            
+        }
+        
+        
+
+
+    }
+
+     public static void RunRoomMenu(List<Room>rooms)
+    {
+        string[] menuOptions = { "Add Room", "Remove Room","Find Room","Print Room", "Exit" };
+        int selectedIndex = 0;
+
+        while (true)
+        {
+            Console.Clear(); 
+
+            Console.WriteLine("Staff Menu:");
+            for (int i = 0; i < menuOptions.Length; i++)
+            {
+                string prefix = (i == selectedIndex) ? "> " : "  ";
+                Console.WriteLine($"{prefix}{menuOptions[i]}");
+            }
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
+            {
+                selectedIndex--;
+            }
+            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
+            {
+                selectedIndex++;
+            }
+            else if (keyInfo.Key == ConsoleKey.Enter)
+            {
+                if (selectedIndex == menuOptions.Length - 1)
+                {
+                    break; 
+                }
+
+                
+                HandleMenuOptionRoom(menuOptions[selectedIndex], rooms);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+    }
+
+    public static void HandleMenuOptionRoom(string selectedOption, List<Room>rooms)
+    {
+        Console.Clear();
+        Console.WriteLine($"You selected: {selectedOption}");
+        
+        if (selectedOption == "Add Room")
+        {
+            RoomMethods.AddRoom(rooms);
+        }
+        else if (selectedOption == "Remove Room")
+        {
+            RoomMethods.RemoveRoom(rooms);    
+        }
+        else if (selectedOption == "Find Room")
+        {
+            RoomMethods.FindRoom(rooms);    
+        }
+        else if (selectedOption == "Print Room")
+        {
+            RoomMethods.PrintRooms(rooms);    
+        }
+        
+        
+
+
+    }
+
+}
