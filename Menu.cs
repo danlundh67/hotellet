@@ -12,12 +12,12 @@ public class Menu
     public static void DisplayAsciiArt()
     {
         string prompt = @"
-         _    _ __  __  _____ 
-        | |  | |  \/  |/ ____|
-        | |__| | \  / | (___  
-        |  __  | |\/| |\___ \ 
-        | |  | | |  | |____) |
-        |_|  |_|_|  |_|_____/ 
+             _    _ __  __  _____ 
+            | |  | |  \/  |/ ____|
+            | |__| | \  / | (___  
+            |  __  | |\/| |\___ \ 
+            | |  | | |  | |____) |
+            |_|  |_|_|  |_|_____/ 
                                 
                                 
     ";
@@ -30,12 +30,18 @@ public class Menu
     {
         string[] menuOptions = { "Staff Menu", "Customer Menu", "Exit" };
         int selectedIndex = 0;
-        
+        TestMethods.TestMethod(customers, roomslist, bookings, reviewlist);
+        Console.CursorVisible = false;
 
         while (true)
         {
            
             DisplayAsciiArt();
+            System.Console.WriteLine("------------------------------------------------------------------------------");
+            System.Console.WriteLine("| Hello and welcome to the Hotel Management Software!                        |"); 
+            System.Console.WriteLine("| Use the \u2191 / \u2193 buttons to navigate the menu. Press enter to choose option   |");
+            System.Console.WriteLine("------------------------------------------------------------------------------");
+            System.Console.WriteLine("");
 
             Console.WriteLine("Main Menu:");
             for (int i = 0; i < menuOptions.Length; i++)
@@ -96,7 +102,7 @@ public class Menu
         {
             DisplayAsciiArt(); 
 
-            Console.WriteLine("Staff Menu:");
+            Console.WriteLine("Customer Menu:");
             for (int i = 0; i < menuOptions.Length; i++)
             {
                 string prefix = (i == selectedIndex) ? "> " : "  ";
@@ -223,7 +229,7 @@ public class Menu
         {
             DisplayAsciiArt(); 
 
-            Console.WriteLine("Staff Menu:");
+            Console.WriteLine("Room Menu:");
             for (int i = 0; i < menuOptions.Length; i++)
             {
                 string prefix = (i == selectedIndex) ? "> " : "  ";
@@ -259,22 +265,46 @@ public class Menu
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
+        bool isValidOption = false;
         
-        if (selectedOption == "Add Room")
+        while (!isValidOption)
         {
-            RoomMethods.AddRoom(rooms);
-        }
-        else if (selectedOption == "Remove Room")
-        {
-            RoomMethods.RemoveRoom(rooms);    
-        }
-        else if (selectedOption == "Find Room")
-        {
-            RoomMethods.FindRoom(rooms);    
-        }
-        else if (selectedOption == "Print Room")
-        {
-            RoomMethods.PrintRooms(rooms);    
+            try
+            {
+                if (selectedOption == "Add Room")
+                {
+                    RoomMethods.AddRoom(rooms);
+                }
+                else if (selectedOption == "Remove Room")
+                {
+                    RoomMethods.RemoveRoom(rooms);    
+                }
+                else if (selectedOption == "Find Room")
+                {
+                    RoomMethods.FindRoom(rooms);    
+                }
+                else if (selectedOption == "Print Room")
+                {
+                    RoomMethods.PrintRooms(rooms);    
+                }
+                isValidOption = true; 
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input format. Please enter a valid value.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Input value is too large or too small.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+            }
         }
         
     }
@@ -288,7 +318,7 @@ public class Menu
         {
             DisplayAsciiArt(); 
 
-            Console.WriteLine("Staff Menu:");
+            Console.WriteLine("Staff(Customer) Menu:");
             for (int i = 0; i < menuOptions.Length; i++)
             {
                 string prefix = (i == selectedIndex) ? "> " : "  ";
@@ -346,14 +376,14 @@ public class Menu
 
     public static void RunBookingMenu(List<Bookings>bookings)
     {
-        string[] menuOptions = { "Add Booking", "Remove Booking","Find Booking","Print Booking", "Exit" };
+        string[] menuOptions = { "Add Booking", "Remove Booking","Find Bookings","Print Booking", "Exit" };
         int selectedIndex = 0;
 
         while (true)
         {
             DisplayAsciiArt(); 
 
-            Console.WriteLine("Staff Menu:");
+            Console.WriteLine("Booking Menu:");
             for (int i = 0; i < menuOptions.Length; i++)
             {
                 string prefix = (i == selectedIndex) ? "> " : "  ";
@@ -398,7 +428,7 @@ public class Menu
         {
             BookingMethods.RemoveBooking(bookings, customers);    
         }
-        else if (selectedOption == "Find Booking")
+        else if (selectedOption == "Find Bookings")
         {
             BookingMethods.AvailableRooms(roomslist, bookings);    
         }
@@ -418,7 +448,7 @@ public class Menu
         {
             DisplayAsciiArt(); 
 
-            Console.WriteLine("Staff Menu:");
+            Console.WriteLine("Review Menu:");
             for (int i = 0; i < menuOptions.Length; i++)
             {
                 string prefix = (i == selectedIndex) ? "> " : "  ";

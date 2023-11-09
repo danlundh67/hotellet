@@ -4,35 +4,36 @@ class RoomMethods
     
     public static void AddRoom(List<Room>rooms)
     {   
-        //skriv ut rum som finns tillängliga alaileblerooms metod!
-        System.Console.Write("Please state the room number that you want to add: ");
-        int tempRoomNr = int.Parse(""+ Console.ReadLine());
-        System.Console.Write("Please state the number of beds that you want to add: ");
-        int tempNrBeds = int.Parse(""+ Console.ReadLine());
-        System.Console.Write("Please state if you the room has handicap accesability (Yes/No): ");
-        bool tempHcp = Console.ReadLine().ToLower().Equals("yes"); //if the input yes/yes the bool is set to true. Otherwise its False
-        System.Console.Write("Please state if you the room is silent (Yes/No): ");
-        bool tempSilent = Console.ReadLine().ToLower().Equals("yes");
-        System.Console.Write("Please state if you the room is a family room (Yes/No): ");
-        bool tempFamily = Console.ReadLine().ToLower().Equals("yes");
-        System.Console.Write("Please state bed model (Kingsize, Queensize, Single, Double, Sofabed or Cribs): ");
-        if (Enum.TryParse(typeof(Diffbeds), Console.ReadLine(), out object tempBedObj)) // Ask the user for the bed model (Kingsize, Queensize....) and attempt to convert it to an Enum value
-        {
-            if (tempBedObj is Diffbeds) // Check if the parsed value is of the Diffbeds enum type.
+            //skriv ut rum som finns tillängliga alaileblerooms metod!
+            
+            System.Console.Write("Please state the room number that you want to add: ");
+            int tempRoomNr = int.Parse(""+ Console.ReadLine());
+            System.Console.Write("Please state the number of beds that you want to add: ");
+            int tempNrBeds = int.Parse(""+ Console.ReadLine());
+            System.Console.Write("Please state if you the room has handicap accesability (Yes/No): ");
+            bool tempHcp = Console.ReadLine().ToLower().Equals("yes"); //if the input yes/yes the bool is set to true. Otherwise its False
+            System.Console.Write("Please state if you the room is silent (Yes/No): ");
+            bool tempSilent = Console.ReadLine().ToLower().Equals("yes");
+            System.Console.Write("Please state if you the room is a family room (Yes/No): ");
+            bool tempFamily = Console.ReadLine().ToLower().Equals("yes");
+            System.Console.Write("Please state bed model (Kingsize, Queensize, Single, Double, Sofabed or Cribs): ");
+            if (Enum.TryParse(typeof(Diffbeds), Console.ReadLine(), out object tempBedObj)) // Ask the user for the bed model (Kingsize, Queensize....) and attempt to convert it to an Enum value
             {
-            Diffbeds tempBed = (Diffbeds)tempBedObj;// Cast the object to Diffbeds and create a new Room object with the collected information.
-            Room addRoom = new Room(tempRoomNr, tempNrBeds, tempHcp, tempSilent, tempFamily, tempBed);
-            rooms.Add(addRoom);
+                if (tempBedObj is Diffbeds) // Check if the parsed value is of the Diffbeds enum type.
+                {
+                Diffbeds tempBed = (Diffbeds)tempBedObj;// Cast the object to Diffbeds and create a new Room object with the collected information.
+                Room addRoom = new Room(tempRoomNr, tempNrBeds, tempHcp, tempSilent, tempFamily, tempBed);
+                rooms.Add(addRoom);
+                }
+                else
+                {
+                System.Console.WriteLine("Invalid bed model. The room was not added.");
+                }
             }
             else
             {
             System.Console.WriteLine("Invalid bed model. The room was not added.");
             }
-        }
-        else
-        {
-        System.Console.WriteLine("Invalid bed model. The room was not added.");
-        }
 
     }
     public static void RemoveRoom(List<Room>rooms)

@@ -8,14 +8,14 @@ public class ReviewMethods
         string alias;
         if (reviewIndex == -1)
         {
-            Console.WriteLine("State you alias for the review:");
+            Console.Write("State you alias for the review: ");
             alias = Console.ReadLine()+"";
         }
         else 
         {
             alias = listReviews[reviewIndex].aliasCustomer;
         }
-        System.Console.WriteLine("State the date for your visit:");
+        System.Console.Write("State the date for your visit: ");
         DateOnly dateOut = DateOnly.Parse(""+ Console.ReadLine());
         System.Console.Write("Please state your rating for the visit (Lousy, Poor, Moderate, Fair or Excellent: ");
         if (Enum.TryParse(typeof(Ratings), Console.ReadLine(), out object tempRateObj))
@@ -43,7 +43,7 @@ public class ReviewMethods
         List<CustomerReview> myReviews = new List<CustomerReview>();
         myReviews = listreviews.Where(x => x.customerid == custId).ToList();
         PrintReviews(myReviews);
-        Console.WriteLine("State the date for the review you want to remove: ");
+        Console.Write("State the date for the review you want to remove: ");
         DateOnly dateOut = DateOnly.Parse(""+ Console.ReadLine());
         int removeIndex = listreviews.FindIndex(y => y.customerid == custId && y.datereview ==dateOut);
         listreviews.RemoveAt(removeIndex);

@@ -15,17 +15,17 @@ public class CustomerMethods
             custId=customers[customers.Count() -1].customerid +1;
         }
         
-        Console.WriteLine("State Forename");
+        Console.Write("State Forename: ");
         string fname = Console.ReadLine() + "";
-        Console.WriteLine("State Lastname");
+        Console.Write("State Lastname: ");
         string lname = Console.ReadLine() + "";
-        Console.WriteLine("State social security Id");
+        Console.Write("State social security Id: ");
         String sID = Console.ReadLine() + "";
-        Console.WriteLine("State the customer adress");
+        Console.Write("State the customer adress: ");
         string adress = Console.ReadLine() + "";
-        Console.WriteLine("State the customer E-mail");
+        Console.Write("State the customer E-mail: ");
         string epost = Console.ReadLine() + "";
-        Console.WriteLine("State the customer phone number");
+        Console.Write("State the customer phone number: ");
         string phone = Console.ReadLine() + "";
         
         Customer newcustomer = new Customer(custId,fname, lname, sID, adress,epost, phone);
@@ -36,14 +36,14 @@ public class CustomerMethods
     static public void RemoveCustomer(List<Customer> customers)
     {
         // Remove a customer from the list of Customers
-        Console.WriteLine("State the Customer id for the customer to be removed");
+        Console.Write("State the Customer id for the customer to be removed: ");
         int.TryParse(Console.ReadLine() +"", out int custId);
         customers.RemoveAt(customers.FindIndex(y => y.customerid == custId));
     }
 
     static public void FindCustomer(List<Customer> customers)
     {
-        Console.WriteLine("State the Customer id for the customer you want to view");
+        Console.Write("State the Customer id for the customer you want to view: ");
         int.TryParse(Console.ReadLine() +"", out int custId);
         int customerIndex = customers.FindIndex(y => y.customerid == custId);
         if (customerIndex == -1)
@@ -64,7 +64,7 @@ public class CustomerMethods
     public static int FindMyId(List<Customer> customers)
     {
         List<Customer> myCust = new List<Customer>();
-        Console.WriteLine("State the lastname:");
+        Console.Write("State the lastname: ");
         string lname = Console.ReadLine() + "";
         myCust = customers.Where(x => x.lastname == lname).ToList();
         PrintCustomer(myCust);
@@ -74,7 +74,7 @@ public class CustomerMethods
         }
         else 
         {
-            Console.WriteLine("State email:");
+            Console.Write("State email: ");
             string email = Console.ReadLine() + "";
             myCust = myCust.Where(x => x.email == email).ToList();
             PrintCustomer(myCust);
@@ -83,7 +83,7 @@ public class CustomerMethods
                 return myCust[0].customerid;
             }
             else{
-                Console.WriteLine("State email:");
+                Console.Write("State email: ");
                 string epost = Console.ReadLine() + "";
                 myCust = myCust.Where(x => x.email == epost).ToList();
                 PrintCustomer(myCust);

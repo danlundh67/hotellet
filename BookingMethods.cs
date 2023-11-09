@@ -3,9 +3,9 @@ public class BookingMethods
 public static void AvailableRooms(List<Room>rooms,List<Bookings>bookings)
 {
     
-    Console.WriteLine("State the in date");
+    Console.Write("State the in date: ");
     DateOnly CustIn = DateOnly.Parse(""+ Console.ReadLine());
-    Console.WriteLine("State the out date");
+    Console.Write("State the out date: ");
     DateOnly CustOut = DateOnly.Parse(""+ Console.ReadLine());
     foreach (Room a in rooms)
     {
@@ -52,20 +52,20 @@ public static void AddBooking(List<Bookings>bookings, List<Room>rooms)
             bookId=bookings[bookings.Count() -1].BookingId +1;
         }
     List<Room> customerrooms = new List<Room>();
-    System.Console.WriteLine("Add customer");
+    System.Console.Write("Add customer: ");
     int custId = int.Parse(""+ Console.ReadLine());
-    System.Console.WriteLine("Add first date");
+    System.Console.Write("Add first date: ");
     DateOnly dateIn = DateOnly.Parse(""+ Console.ReadLine());
-    System.Console.WriteLine("Add last date");
+    System.Console.Write("Add last date: ");
     DateOnly dateOut = DateOnly.Parse(""+ Console.ReadLine());
-    System.Console.Write("checked in (Yes/No) ?");
+    System.Console.Write("checked in (Yes/No) ?: ");
     bool tempChecked = Console.ReadLine().ToLower().Equals("yes");
-    System.Console.WriteLine("Creditcard number");
+    System.Console.Write("Creditcard number: ");
     string creditC = Console.ReadLine();
 
     Console.WriteLine("------- Available Rooms -------");
     MyAvailableRooms(rooms, bookings, dateIn, dateOut);
-    Console.WriteLine("\n\nState the room numbers to include in the booking (q = quit) ");
+    Console.Write("\n\nState the room numbers to include in the booking (q = quit): ");
     string aroom="";
     do
     {
@@ -76,8 +76,6 @@ public static void AddBooking(List<Bookings>bookings, List<Room>rooms)
             customerrooms.Add(room);
         }
         
-
-
     } while (aroom != "q");
 
     //Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
