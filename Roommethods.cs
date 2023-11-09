@@ -97,4 +97,10 @@ class RoomMethods
             Console.WriteLine("-------------------------------------");
         }
     }
+
+    public static Room GetRooms(List<Room>rooms, int roomnr)
+    {
+        int roomIndex = rooms.FindIndex(y => y.RoomNr == roomnr);
+        return rooms[roomIndex];
+    }    
 }

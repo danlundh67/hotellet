@@ -22,6 +22,24 @@ public static void AvailableRooms(List<Room>rooms,List<Bookings>bookings)
     
 
 }
+
+public static void MyAvailableRooms(List<Room>rooms,List<Bookings>bookings, DateOnly CustIn, DateOnly CustOut)
+{
+    foreach (Room a in rooms)
+    {
+        Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds}|");
+        if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
+        {
+            Console.WriteLine(" Available!");
+        }
+        else
+        {
+            Console.WriteLine(" Booked!");
+        }
+    }
+    
+
+}
 public static void AddBooking(List<Bookings>bookings, List<Room>rooms)
 {
     int bookId;
@@ -44,6 +62,23 @@ public static void AddBooking(List<Bookings>bookings, List<Room>rooms)
     bool tempChecked = Console.ReadLine().ToLower().Equals("yes");
     System.Console.WriteLine("Creditcard number");
     string creditC = Console.ReadLine();
+
+    Console.WriteLine("------- Available Rooms -------");
+    MyAvailableRooms(rooms, bookings, dateIn, dateOut);
+    Console.WriteLine("\n\nState the room numbers to include in the booking (q = quit) ");
+    string aroom="";
+    do
+    {
+        aroom=Console.ReadLine()+"";
+        if (aroom!="q")
+        {
+            Room room = RoomMethods.GetRooms(rooms,int.Parse(aroom));
+            customerrooms.Add(room);
+        }
+        
+
+
+    } while (aroom != "q");
 
     //Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
     //customerrooms.Add(room);
