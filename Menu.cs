@@ -39,7 +39,7 @@ public class Menu
             DisplayAsciiArt();
             System.Console.WriteLine("------------------------------------------------------------------------------");
             System.Console.WriteLine("| Hello and welcome to the Hotel Management Software!                        |"); 
-            System.Console.WriteLine("| Use the \u2191 / \u2193 buttons to navigate the menu. Press enter to choose option   |");
+            System.Console.WriteLine("| Use the \u2191 / \u2193 buttons to navigate the menu. Press enter to choose option.   |");
             System.Console.WriteLine("------------------------------------------------------------------------------");
             System.Console.WriteLine("");
 
@@ -141,7 +141,7 @@ public class Menu
         
         if (selectedOption == "Book a Room")
         {
-            //RunRoomMenu(roomslist);
+            BookingMethods.BookARoom(bookings,rooms,customers);
         }
         else if (selectedOption == "Available Rooms")
         {
@@ -354,24 +354,47 @@ public class Menu
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
+        bool isValidOption = false;
         
-        if (selectedOption == "Add Customer")
+        while (!isValidOption)
         {
-            CustomerMethods.AddCustomer(customers);
-        }
-        else if (selectedOption == "Remove Customer")
-        {
-            CustomerMethods.RemoveCustomer(customers);    
-        }
-        else if (selectedOption == "Find Customer")
-        {
-            CustomerMethods.FindCustomer(customers);;    
-        }
-        else if (selectedOption == "Print Customer")
-        {
-            CustomerMethods.PrintCustomer(customers);    
-        }
+            try{
         
+                if (selectedOption == "Add Customer")
+                {
+                    CustomerMethods.AddCustomer(customers);
+                }
+                else if (selectedOption == "Remove Customer")
+                {
+                    CustomerMethods.RemoveCustomer(customers);    
+                }
+                else if (selectedOption == "Find Customer")
+                {
+                    CustomerMethods.FindCustomer(customers);;    
+                }
+                else if (selectedOption == "Print Customer")
+                {
+                    CustomerMethods.PrintCustomer(customers);    
+                }
+            isValidOption = true; 
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input format. Please enter a valid value.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Input value is too large or too small.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+            }
+        }
     }
 
     public static void RunBookingMenu(List<Bookings>bookings)
@@ -419,22 +442,45 @@ public class Menu
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
+        bool isValidOption = false;
         
-        if (selectedOption == "Add Booking")
+        while (!isValidOption)
         {
-            BookingMethods.AddBooking(bookings, roomslist);
-        }
-        else if (selectedOption == "Remove Booking")
-        {
-            BookingMethods.RemoveBooking(bookings, customers);    
-        }
-        else if (selectedOption == "Find Bookings")
-        {
-            BookingMethods.AvailableRooms(roomslist, bookings);    
-        }
-        else if (selectedOption == "Print Booking")
-        {
-            BookingMethods.PrintBooking(bookings, customers);    
+            try{
+                if (selectedOption == "Add Booking")
+                {
+                    BookingMethods.AddBooking(bookings, roomslist);
+                }
+                else if (selectedOption == "Remove Booking")
+                {
+                    BookingMethods.RemoveBooking(bookings, customers);    
+                }
+                else if (selectedOption == "Find Bookings")
+                {
+                    BookingMethods.AvailableRooms(roomslist, bookings);    
+                }
+                else if (selectedOption == "Print Booking")
+                {
+                    BookingMethods.PrintBooking(bookings, customers);    
+                }
+            isValidOption = true; 
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input format. Please enter a valid value.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Input value is too large or too small.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+            }
         }
         
     }

@@ -4,10 +4,17 @@ class RoomMethods
     
     public static void AddRoom(List<Room>rooms)
     {   
-            //skriv ut rum som finns tillängliga alaileblerooms metod!
+            int tmpRoomNr;
+            if (rooms.Count() < 1)
+            {
+                tmpRoomNr=100;
+            }
+            else
+            {
+                tmpRoomNr=rooms[rooms.Count() -1].RoomNr +1;
+            }
             
-            System.Console.Write("Please state the room number that you want to add: ");
-            int tempRoomNr = int.Parse(""+ Console.ReadLine());
+            
             System.Console.Write("Please state the number of beds that you want to add: ");
             int tempNrBeds = int.Parse(""+ Console.ReadLine());
             System.Console.Write("Please state if you the room has handicap accesability (Yes/No): ");
@@ -22,7 +29,7 @@ class RoomMethods
                 if (tempBedObj is Diffbeds) // Check if the parsed value is of the Diffbeds enum type.
                 {
                 Diffbeds tempBed = (Diffbeds)tempBedObj;// Cast the object to Diffbeds and create a new Room object with the collected information.
-                Room addRoom = new Room(tempRoomNr, tempNrBeds, tempHcp, tempSilent, tempFamily, tempBed);
+                Room addRoom = new Room(tmpRoomNr, tempNrBeds, tempHcp, tempSilent, tempFamily, tempBed);
                 rooms.Add(addRoom);
                 }
                 else
@@ -91,7 +98,7 @@ class RoomMethods
             string familyR = rooms[i].FamilyRoom ? "Yes" : "No";
             Console.WriteLine($"{i+1} - Room number: {rooms[i].RoomNr} ");
             Console.WriteLine($"  - Nr of beds: {rooms[i].NrOfBeds} ");
-            Console.WriteLine($"  - Hcp accessible: {hcpRoom} ");
+            Console.WriteLine($"  - : {hcpRoom} ");
             Console.WriteLine($"  - Silent room: {silentR} ");
             Console.WriteLine($"  - Family room: {familyR} ");
             Console.WriteLine($"  - Type of bed: {rooms[i].Diffbeds} ");
@@ -104,4 +111,6 @@ class RoomMethods
         int roomIndex = rooms.FindIndex(y => y.RoomNr == roomnr);
         return rooms[roomIndex];
     }    
+
+    
 }

@@ -134,6 +134,37 @@ public class CustomerMethods
             Console.WriteLine("------------------------------------------------");
         }
     }
+    static public Customer CustomerMakeCustomer(List<Customer> customers)
+    {
+        
+        int custId;
+        if (customers.Count() < 1)
+        {
+            custId=1;
+        }
+        else
+        {
+            custId=customers[customers.Count() -1].customerid +1;
+        }
+        
+        Console.Write("Please enter your Forename: ");
+        string fname = Console.ReadLine() + "";
+        Console.Write("Please enter your Lastname: ");
+        string lname = Console.ReadLine() + "";
+        Console.Write("Please enter your social security Id: ");
+        String sID = Console.ReadLine() + "";
+        Console.Write("Please enter your home adress: ");
+        string adress = Console.ReadLine() + "";
+        Console.Write("Please enter your customer E-mail: ");
+        string epost = Console.ReadLine() + "";
+        Console.Write("Please enter your phone number: ");
+        string phone = Console.ReadLine() + "";
+        
+        Customer newcustomer = new Customer(custId,fname, lname, sID, adress,epost, phone);
+        customers.Add(newcustomer);
+        return newcustomer;
+
+    }
 
 }
 

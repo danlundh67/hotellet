@@ -9,7 +9,7 @@ public static void AvailableRooms(List<Room>rooms,List<Bookings>bookings)
     DateOnly CustOut = DateOnly.Parse(""+ Console.ReadLine());
     foreach (Room a in rooms)
     {
-        Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds}|");
+        Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds}| ");
         if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
         {
             Console.WriteLine(" Available!");
@@ -27,7 +27,7 @@ public static void MyAvailableRooms(List<Room>rooms,List<Bookings>bookings, Date
 {
     foreach (Room a in rooms)
     {
-        Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds}|");
+        Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds} | Type of bed: {a.Diffbeds} | Family Room: {a.FamilyRoom} | Hcp accessible: {a.Hcp} | Silent room: {a.SilentRoom}| ");
         if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
         {
             Console.WriteLine(" Available!");
@@ -78,8 +78,7 @@ public static void AddBooking(List<Bookings>bookings, List<Room>rooms)
         
     } while (aroom != "q");
 
-    //Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
-    //customerrooms.Add(room);
+    
     Bookings bookings1 = new Bookings(bookId, dateIn, dateOut, custId, tempChecked, creditC, customerrooms);
     bookings.Add(bookings1);
 
@@ -167,6 +166,53 @@ public static void PrintBooking(List<Bookings>bookings, List<Customer>customers)
         Console.WriteLine("------------------------");
 
     }
+}
+public static void BookARoom(List<Bookings>bookings, List<Room>rooms, List<Customer>customers)
+{
+
+    Customer customer = CustomerMethods.CustomerMakeCustomer(customers);
+    System.Console.WriteLine("----------------------------------------");
+    bool tempChecked = false;
+    int bookId;
+        if (bookings.Count() < 1)
+        {
+            bookId=100;
+        }
+        else
+        {
+            bookId=bookings[bookings.Count() -1].BookingId +1;
+        }
+    List<Room> customerrooms = new List<Room>();
+    System.Console.Write("Please enter your check-in date: ");
+    DateOnly dateIn = DateOnly.Parse(""+ Console.ReadLine());
+    System.Console.Write("Please enter your check-out date: ");
+    DateOnly dateOut = DateOnly.Parse(""+ Console.ReadLine());
+    System.Console.Write("Please enter your Creditcard number: ");
+    string creditC = Console.ReadLine();
+    System.Console.WriteLine("----------------------------------------");
+
+    Console.WriteLine("------- Available Rooms -------");
+    MyAvailableRooms(rooms, bookings, dateIn, dateOut);
+    Console.Write("\n\nState the room numbers to include in the booking (q = quit): ");
+    string aroom="";
+    do
+    {
+        aroom=Console.ReadLine()+"";
+        if (aroom!="q")
+        {
+            Room room = RoomMethods.GetRooms(rooms,int.Parse(aroom));
+            customerrooms.Add(room);
+        }
+        
+    } while (aroom != "q");
+     int custId = customer.customerid;
+
+    Bookings bookings1 = new Bookings(bookId, dateIn, dateOut, custId, tempChecked, creditC, customerrooms);
+    bookings.Add(bookings1);
+    
+
+
+    
 }
 }
 
