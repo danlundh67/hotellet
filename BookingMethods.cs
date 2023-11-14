@@ -23,23 +23,6 @@ public static void AvailableRooms(List<Room>rooms,List<Bookings>bookings)
 
 }
 
-public static void MyAvailableRooms(List<Room>rooms,List<Bookings>bookings, DateOnly CustIn, DateOnly CustOut)
-{
-    foreach (Room a in rooms)
-    {
-        Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds} | Type of bed: {a.Diffbeds} | Family Room: {a.FamilyRoom} | Hcp accessible: {a.Hcp} | Silent room: {a.SilentRoom}| ");
-        if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
-        {
-            Console.WriteLine(" Available!");
-        }
-        else
-        {
-            Console.WriteLine(" Booked!");
-        }
-    }
-    
-
-}
 
 public static List<Room> ListAvailableRooms(List<Room>rooms,List<Bookings>bookings, DateOnly CustIn, DateOnly CustOut)
 {

@@ -97,7 +97,7 @@ public class Menu
     }
     public static void RunCustomerMenu(int CustId)
     {
-        string[] menuOptions = { "Book a Room", "Available Rooms", "Submit a Review", "Exit" };
+        string[] menuOptions = { "Book a Room", "Available Rooms", "Submit a Review", "Print Reviews", "Exit" };
 
         RunMenu("Customer Menu", menuOptions, HandleMenuOptionCustomer, CustId);
     }
@@ -118,6 +118,10 @@ public class Menu
         else if (selectedOption == "Submit a Review")
         {
             ReviewMethods.AddReview(CustId, reviewlist);
+        }
+        else if (selectedOption == "Print Reviews")
+        {
+            ReviewMethods.PrintReviews(reviewlist);
         }
         
     }

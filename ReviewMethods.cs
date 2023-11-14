@@ -77,8 +77,5 @@ public class ReviewMethods
 
     }
 
-    public static void PrintSumReviews(List<CustomerReview> listReviews)
-    {
-        //listReviews.OrderBy(x => x.)
-    }
+    
 }
