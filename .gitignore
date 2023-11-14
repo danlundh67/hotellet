@@ -22,3 +22,6 @@ obj/Debug/net7.0/hotellet.genruntimeconfig.cache
 obj/Debug/net7.0/hotellet.pdb
 obj/Debug/net7.0/ref/hotellet.dll
 obj/Debug/net7.0/refint/hotellet.dll
+.vscode/launch.json
+obj/Debug/net7.0/hotellet.sourcelink.json
+obj/Debug/net7.0/hotellet.sourcelink.json

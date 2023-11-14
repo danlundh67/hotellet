@@ -12,7 +12,8 @@ public class Menu
     public static void StartProgram()
     {
         int CustId = 0;
-        
+        TestMethods.TestMethod(customers, roomslist, bookings, reviewlist);
+
         string[] mainMenuOptions = { "Staff Menu", "Customer Menu", "Exit" };
         RunMenu("Main Menu", mainMenuOptions, HandleMenuOptionStart, CustId);
 
@@ -41,7 +42,6 @@ public class Menu
     public static void RunMenu(string menuName, string[] menuOptions, Action<string, int> handleMenuOption, int CustId)
 {
     int selectedIndex = 0;
-    TestMethods.TestMethod(customers, roomslist, bookings, reviewlist);
     Console.CursorVisible = false;
 
     while (true)
@@ -56,7 +56,7 @@ public class Menu
         }
 
         ConsoleKeyInfo keyInfo = Console.ReadKey(); // Read user input
-        
+
         if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0) // Update the selected index based on user input
         {
             selectedIndex--;
@@ -76,7 +76,7 @@ public class Menu
             handleMenuOption(menuOptions[selectedIndex], CustId);
 
             Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            Console.ReadLine(); 
         }
     }
 }
@@ -156,7 +156,7 @@ public class Menu
      public static void RunRoomMenu(int CustId)
     {
         string[] menuOptions = { "Add Room", "Remove Room", "Find Room", "Print Room", "Exit" };
-    RunMenu("Room Menu", menuOptions, HandleMenuOptionRoom, CustId);
+        RunMenu("Room Menu", menuOptions, HandleMenuOptionRoom, CustId);
     }
 
     public static void HandleMenuOptionRoom(string selectedOption, int CustId)
@@ -164,21 +164,21 @@ public class Menu
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
         if (selectedOption == "Add Room")
-    {
-        RoomMethods.AddRoom(roomslist);
-    }
-    else if (selectedOption == "Remove Room")
-    {
-        RoomMethods.RemoveRoom(roomslist);    
-    }
-    else if (selectedOption == "Find Room")
-    {
-        RoomMethods.FindRoom(roomslist);    
-    }
-    else if (selectedOption == "Print Room")
-    {
-        RoomMethods.PrintRooms(roomslist);    
-    }
+        {
+            RoomMethods.AddRoom(roomslist);
+        }
+        else if (selectedOption == "Remove Room")
+        {
+            RoomMethods.RemoveRoom(roomslist);    
+        }
+        else if (selectedOption == "Find Room")
+        {
+            RoomMethods.FindRoom(roomslist);    
+        }
+        else if (selectedOption == "Print Room")
+        {
+            RoomMethods.PrintRooms(roomslist);    
+        }
         
     }
 
