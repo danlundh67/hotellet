@@ -66,7 +66,7 @@ public class CustomerMethods
         }
     }
 
-    // Stepwise seach for finding a specific customer
+    // Stepwise seach for finding a specific customer returns Custommer id
 
     public static int FindMyId(List<Customer> customers)
     {

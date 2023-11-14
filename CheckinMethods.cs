@@ -1,5 +1,9 @@
+using System.Security.Cryptography.X509Certificates;
+
 public class Checkin
 {
+
+    // Checks In or Out a Customer for a specific booking
     static public void CheckInOut(List<Bookings>bookings, List<Customer>customers)
     {
         List<Bookings> custbook =new List<Bookings>();
@@ -8,6 +12,7 @@ public class Checkin
         if (custid != -1)
         {
             custbook = bookings.Where(x => x.Customerid == custid).ToList();
+            
             if (custbook.Count>0)
             {
                 foreach (Bookings a in custbook)
@@ -44,6 +49,7 @@ public class Checkin
         }
     }
 
+    // Print all checked in Customers
     static public void AllCheckedIn(List<Bookings>bookings)
     {
         List<Bookings> custbook =new List<Bookings>();
