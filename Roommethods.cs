@@ -1,7 +1,7 @@
 class RoomMethods
 {
 
-    // Add a new room ti the list of rooms
+    // Add a new room to the list of rooms
     public static void AddRoom(List<Room>rooms)
     {   
             int tmpRoomNr;

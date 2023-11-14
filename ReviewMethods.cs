@@ -2,6 +2,8 @@ using System.Data;
 
 public class ReviewMethods
 {
+    // Check if the customer has already submitted a review
+    // If the customer has not submitted a review, prompts the user for an alias, visit date, rating, and a short comment.
     public static void AddReview(int custId, List<CustomerReview> listReviews)
     {
         int reviewIndex = listReviews.FindIndex(y => y.customerid == custId);
@@ -37,6 +39,7 @@ public class ReviewMethods
 
     }
 
+    // Removes review from list.
     public static void RemoveReview(int custId, List<CustomerReview> listreviews)
     {
 
@@ -48,13 +51,14 @@ public class ReviewMethods
         int removeIndex = listreviews.FindIndex(y => y.customerid == custId && y.datereview ==dateOut);
         listreviews.RemoveAt(removeIndex);
     }
-
-
+    
+    // Sorts review in ascending order.
     public static List<CustomerReview> SortByRating(List<CustomerReview> originalList)
     {
         return originalList.OrderBy(x => x.rating).ToList();
     }
 
+    // Sort list of reviews and prints it out.
     public static void PrintReviews(List<CustomerReview> listReviews)
     {
         int sum = 0;
