@@ -9,6 +9,16 @@ public class Menu
     public static List<Bookings> bookings = new List<Bookings>();
     public static List<CustomerReview> reviewlist = new List<CustomerReview>();
 
+    public static void StartProgram()
+    {
+        int CustId = 0;
+        
+        string[] mainMenuOptions = { "Staff Menu", "Customer Menu", "Exit" };
+        RunMenu("Main Menu", mainMenuOptions, HandleMenuOptionStart, CustId);
+
+        Console.WriteLine("Thank you for using the Hotel Management Software. Goodbye!");
+    }
+
     public static void DisplayAsciiArt()
     {
         string prompt = @"
@@ -18,134 +28,92 @@ public class Menu
             |  __  | |\/| |\___ \ 
             | |  | | |  | |____) |
             |_|  |_|_|  |_|_____/ 
-                                
-                                
+ ----------------------------------------------------------------------------
+| Hello and welcome to the Hotel Management Software!                        |
+| Use the ↑/↓ buttons to navigate the menu. Press enter to choose option.    |
+ ----------------------------------------------------------------------------                         
     ";
 
         Console.Clear();
         Console.WriteLine(prompt);
     }
+    //menuName = name of the menu. menuOptions = array of strings representing the menu options. handleMenuOption = Delegate that will handle the selected menu option. CustId = customer id.
+    public static void RunMenu(string menuName, string[] menuOptions, Action<string, int> handleMenuOption, int CustId)
+{
+    int selectedIndex = 0;
+    TestMethods.TestMethod(customers, roomslist, bookings, reviewlist);
+    Console.CursorVisible = false;
 
-    public static void RunStartMenu(int CustId)
+    while (true)
     {
-        string[] menuOptions = { "Staff Menu", "Customer Menu", "Exit" };
-        int selectedIndex = 0;
-        TestMethods.TestMethod(customers, roomslist, bookings, reviewlist);
-        Console.CursorVisible = false;
+        DisplayAsciiArt();
 
-        while (true)
+        Console.WriteLine($"{menuName}:");
+        for (int i = 0; i < menuOptions.Length; i++)
         {
-           
-            DisplayAsciiArt();
-            System.Console.WriteLine("------------------------------------------------------------------------------");
-            System.Console.WriteLine("| Hello and welcome to the Hotel Management Software!                        |"); 
-            System.Console.WriteLine("| Use the \u2191 / \u2193 buttons to navigate the menu. Press enter to choose option.   |");
-            System.Console.WriteLine("------------------------------------------------------------------------------");
-            System.Console.WriteLine("");
+            string prefix = (i == selectedIndex) ? "> " : "  ";
+            Console.WriteLine($"{prefix}{menuOptions[i]}"); // Display menu options with '>' prefix for the selected option
+        }
 
-            Console.WriteLine("Main Menu:");
-            for (int i = 0; i < menuOptions.Length; i++)
+        ConsoleKeyInfo keyInfo = Console.ReadKey(); // Read user input
+        
+        if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0) // Update the selected index based on user input
+        {
+            selectedIndex--;
+        }
+        else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
+        {
+            selectedIndex++;
+        }
+        else if (keyInfo.Key == ConsoleKey.Enter)
+        {
+            if (selectedIndex == menuOptions.Length - 1)
             {
-                string prefix = (i == selectedIndex) ? "> " : "  ";
-                Console.WriteLine($"{prefix}{menuOptions[i]}");
+                break; // If the user selects "Exit," break out of the loop
             }
 
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            // Invoke the handleMenuOption delegate with the selected option and CustId
+            handleMenuOption(menuOptions[selectedIndex], CustId);
 
-            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
-            {
-                selectedIndex--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
-            {
-                selectedIndex++;
-            }
-            else if (keyInfo.Key == ConsoleKey.Enter)
-            {
-                if (selectedIndex == menuOptions.Length - 1)
-                {
-                    break; 
-                }
-
-                
-                HandleMenuOptionStart(menuOptions[selectedIndex], CustId);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
+}
 
     public static void HandleMenuOptionStart(string selectedOption, int CustId)
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
-        
+
         if (selectedOption == "Staff Menu")
         {
-            
             RunStaffMenu(CustId);
         }
         else if (selectedOption == "Customer Menu")
         {
-
-            RunCustomerMenu(CustId);   
-            
+            RunCustomerMenu(CustId);
         }
-        
     }
     public static void RunCustomerMenu(int CustId)
     {
-        string[] menuOptions = { "Book a Room", "Available Rooms","Submit a Review", "Exit" };
-        int selectedIndex = 0;
+        string[] menuOptions = { "Book a Room", "Available Rooms", "Submit a Review", "Exit" };
 
-        while (true)
-        {
-            DisplayAsciiArt(); 
-
-            Console.WriteLine("Customer Menu:");
-            for (int i = 0; i < menuOptions.Length; i++)
-            {
-                string prefix = (i == selectedIndex) ? "> " : "  ";
-                Console.WriteLine($"{prefix}{menuOptions[i]}");
-            }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
-            {
-                selectedIndex--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
-            {
-                selectedIndex++;
-            }
-            else if (keyInfo.Key == ConsoleKey.Enter)
-            {
-                if (selectedIndex == menuOptions.Length - 1)
-                {
-                    break; 
-                }
-
-                
-                HandleMenuOptionCustomer(menuOptions[selectedIndex], bookings, roomslist, CustId);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
+        RunMenu("Customer Menu", menuOptions, HandleMenuOptionCustomer, CustId);
     }
 
-    public static void HandleMenuOptionCustomer(string selectedOption, List<Bookings> bookings, List<Room> rooms, int CustId)
+    public static void HandleMenuOptionCustomer(string selectedOption, int CustId)
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
         
         if (selectedOption == "Book a Room")
         {
-            BookingMethods.BookARoom(bookings,rooms,customers);
+            BookingMethods.BookARoom(bookings,roomslist,customers);
         }
         else if (selectedOption == "Available Rooms")
         {
-            BookingMethods.AvailableRooms(rooms, bookings);
+            BookingMethods.AvailableRooms(roomslist, bookings);
         }
         else if (selectedOption == "Submit a Review")
         {
@@ -156,43 +124,8 @@ public class Menu
 
     public static void RunStaffMenu(int CustId)
     {
-        string[] menuOptions = { "Room utility", "Customer utility", "Booking utility","Review utility", "Exit" };
-        int selectedIndex = 0;
-
-        while (true)
-        {
-            DisplayAsciiArt(); 
-
-            Console.WriteLine("Staff Menu:");
-            for (int i = 0; i < menuOptions.Length; i++)
-            {
-                string prefix = (i == selectedIndex) ? "> " : "  ";
-                Console.WriteLine($"{prefix}{menuOptions[i]}");
-            }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
-            {
-                selectedIndex--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
-            {
-                selectedIndex++;
-            }
-            else if (keyInfo.Key == ConsoleKey.Enter)
-            {
-                if (selectedIndex == menuOptions.Length - 1)
-                {
-                    break; 
-                }
-
-                
-                HandleMenuOptionStaff(menuOptions[selectedIndex], CustId);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
+        string[] menuOptions = { "Room utility", "Customer utility", "Booking utility", "Review utility", "Exit" };
+        RunMenu("Staff Menu", menuOptions, HandleMenuOptionStaff, CustId);
     }
 
     public static void HandleMenuOptionStaff(string selectedOption, int CustId)
@@ -202,331 +135,117 @@ public class Menu
         
         if (selectedOption == "Room utility")
         {
-            RunRoomMenu(roomslist);
+            RunRoomMenu(CustId);
         }
         else if (selectedOption == "Customer utility")
         {
-            RunCustomerstaffMenu(customers);
+            RunCustomerstaffMenu(CustId);
         }
         else if (selectedOption == "Booking utility")
         {
-            RunBookingMenu(bookings);
+            RunBookingMenu(CustId);
         }
         else if (selectedOption == "Review utility")
         {
-            RunReviewMenu(reviewlist, CustId);
+            RunReviewMenu(CustId);
         }
         
         
     }
 
-     public static void RunRoomMenu(List<Room>rooms)
+     public static void RunRoomMenu(int CustId)
     {
-        string[] menuOptions = { "Add Room", "Remove Room","Find Room","Print Room", "Exit" };
-        int selectedIndex = 0;
-
-        while (true)
-        {
-            DisplayAsciiArt(); 
-
-            Console.WriteLine("Room Menu:");
-            for (int i = 0; i < menuOptions.Length; i++)
-            {
-                string prefix = (i == selectedIndex) ? "> " : "  ";
-                Console.WriteLine($"{prefix}{menuOptions[i]}");
-            }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
-            {
-                selectedIndex--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
-            {
-                selectedIndex++;
-            }
-            else if (keyInfo.Key == ConsoleKey.Enter)
-            {
-                if (selectedIndex == menuOptions.Length - 1)
-                {
-                    break; 
-                }
-
-                
-                HandleMenuOptionRoom(menuOptions[selectedIndex], rooms);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
+        string[] menuOptions = { "Add Room", "Remove Room", "Find Room", "Print Room", "Exit" };
+    RunMenu("Room Menu", menuOptions, HandleMenuOptionRoom, CustId);
     }
 
-    public static void HandleMenuOptionRoom(string selectedOption, List<Room>rooms)
+    public static void HandleMenuOptionRoom(string selectedOption, int CustId)
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
-        bool isValidOption = false;
-        
-        while (!isValidOption)
-        {
-            try
-            {
-                if (selectedOption == "Add Room")
-                {
-                    RoomMethods.AddRoom(rooms);
-                }
-                else if (selectedOption == "Remove Room")
-                {
-                    RoomMethods.RemoveRoom(rooms);    
-                }
-                else if (selectedOption == "Find Room")
-                {
-                    RoomMethods.FindRoom(rooms);    
-                }
-                else if (selectedOption == "Print Room")
-                {
-                    RoomMethods.PrintRooms(rooms);    
-                }
-                isValidOption = true; 
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input format. Please enter a valid value.");
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine("Input value is too large or too small.");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-            }
-        }
-        
-    }
-
-    public static void RunCustomerstaffMenu(List<Customer>customers)
+        if (selectedOption == "Add Room")
     {
-        string[] menuOptions = { "Add Customer", "Remove Customer","Find Customer","Print Customer", "Exit" };
-        int selectedIndex = 0;
-
-        while (true)
-        {
-            DisplayAsciiArt(); 
-
-            Console.WriteLine("Staff(Customer) Menu:");
-            for (int i = 0; i < menuOptions.Length; i++)
-            {
-                string prefix = (i == selectedIndex) ? "> " : "  ";
-                Console.WriteLine($"{prefix}{menuOptions[i]}");
-            }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
-            {
-                selectedIndex--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
-            {
-                selectedIndex++;
-            }
-            else if (keyInfo.Key == ConsoleKey.Enter)
-            {
-                if (selectedIndex == menuOptions.Length - 1)
-                {
-                    break; 
-                }
-
-                
-                HandleMenuOptionCustomerStaff(menuOptions[selectedIndex], customers);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
+        RoomMethods.AddRoom(roomslist);
+    }
+    else if (selectedOption == "Remove Room")
+    {
+        RoomMethods.RemoveRoom(roomslist);    
+    }
+    else if (selectedOption == "Find Room")
+    {
+        RoomMethods.FindRoom(roomslist);    
+    }
+    else if (selectedOption == "Print Room")
+    {
+        RoomMethods.PrintRooms(roomslist);    
+    }
+        
     }
 
-    public static void HandleMenuOptionCustomerStaff(string selectedOption, List<Customer>customers)
+    public static void RunCustomerstaffMenu(int CustId)
+    {
+        string[] menuOptions = { "Add Customer", "Remove Customer", "Find Customer", "Print Customer", "Exit" };
+        RunMenu("Customer Staff Menu", menuOptions, HandleMenuOptionCustomerStaff, CustId);
+    }
+
+    public static void HandleMenuOptionCustomerStaff(string selectedOption, int CustId)
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
-        bool isValidOption = false;
-        
-        while (!isValidOption)
+        if (selectedOption == "Add Customer")
         {
-            try{
-        
-                if (selectedOption == "Add Customer")
-                {
-                    CustomerMethods.AddCustomer(customers);
-                }
-                else if (selectedOption == "Remove Customer")
-                {
-                    CustomerMethods.RemoveCustomer(customers);    
-                }
-                else if (selectedOption == "Find Customer")
-                {
-                    CustomerMethods.FindCustomer(customers);;    
-                }
-                else if (selectedOption == "Print Customer")
-                {
-                    CustomerMethods.PrintCustomer(customers);    
-                }
-            isValidOption = true; 
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input format. Please enter a valid value.");
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine("Input value is too large or too small.");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-            }
+            CustomerMethods.AddCustomer(customers);
+        }
+        else if (selectedOption == "Remove Customer")
+        {
+            CustomerMethods.RemoveCustomer(customers);    
+        }
+        else if (selectedOption == "Find Customer")
+        {
+            CustomerMethods.FindCustomer(customers);    
+        }
+        else if (selectedOption == "Print Customer")
+        {
+            CustomerMethods.PrintCustomer(customers);    
         }
     }
 
-    public static void RunBookingMenu(List<Bookings>bookings)
+    public static void RunBookingMenu(int CustId)
     {
-        string[] menuOptions = { "Add Booking", "Remove Booking","Find Bookings","Print Booking", "Exit" };
-        int selectedIndex = 0;
-
-        while (true)
-        {
-            DisplayAsciiArt(); 
-
-            Console.WriteLine("Booking Menu:");
-            for (int i = 0; i < menuOptions.Length; i++)
-            {
-                string prefix = (i == selectedIndex) ? "> " : "  ";
-                Console.WriteLine($"{prefix}{menuOptions[i]}");
-            }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
-            {
-                selectedIndex--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
-            {
-                selectedIndex++;
-            }
-            else if (keyInfo.Key == ConsoleKey.Enter)
-            {
-                if (selectedIndex == menuOptions.Length - 1)
-                {
-                    break; 
-                }
-
-                
-                HandleMenuOptionBooking(menuOptions[selectedIndex], bookings);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
+       string[] menuOptions = { "Add Booking", "Remove Booking", "Find Bookings", "Print Booking", "Exit" };
+        RunMenu("Booking Menu", menuOptions, HandleMenuOptionBooking, CustId);
     }
 
-    public static void HandleMenuOptionBooking(string selectedOption, List<Bookings>bookings)
+    public static void HandleMenuOptionBooking(string selectedOption, int CustId)
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");
-        bool isValidOption = false;
-        
-        while (!isValidOption)
+        if (selectedOption == "Add Booking")
         {
-            try{
-                if (selectedOption == "Add Booking")
-                {
-                    BookingMethods.AddBooking(bookings, roomslist);
-                }
-                else if (selectedOption == "Remove Booking")
-                {
-                    BookingMethods.RemoveBooking(bookings, customers);    
-                }
-                else if (selectedOption == "Find Bookings")
-                {
-                    BookingMethods.AvailableRooms(roomslist, bookings);    
-                }
-                else if (selectedOption == "Print Booking")
-                {
-                    BookingMethods.PrintBooking(bookings, customers);    
-                }
-            isValidOption = true; 
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input format. Please enter a valid value.");
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine("Input value is too large or too small.");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-            }
+            BookingMethods.AddBooking(bookings, roomslist);
+        }
+        else if (selectedOption == "Remove Booking")
+        {
+            BookingMethods.RemoveBooking(bookings, customers);    
+        }
+        else if (selectedOption == "Find Bookings")
+        {
+            BookingMethods.AvailableRooms(roomslist, bookings);    
+        }
+        else if (selectedOption == "Print Booking")
+        {
+            BookingMethods.PrintBooking(bookings, customers);    
         }
         
     }
 
-    public static void RunReviewMenu(List<CustomerReview>reviewlist, int CustId)
+    public static void RunReviewMenu(int CustId)
     {
-        string[] menuOptions = { "Remove Review","Print Reviews", "Exit" };
-        int selectedIndex = 0;
-
-        while (true)
-        {
-            DisplayAsciiArt(); 
-
-            Console.WriteLine("Review Menu:");
-            for (int i = 0; i < menuOptions.Length; i++)
-            {
-                string prefix = (i == selectedIndex) ? "> " : "  ";
-                Console.WriteLine($"{prefix}{menuOptions[i]}");
-            }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
-            {
-                selectedIndex--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
-            {
-                selectedIndex++;
-            }
-            else if (keyInfo.Key == ConsoleKey.Enter)
-            {
-                if (selectedIndex == menuOptions.Length - 1)
-                {
-                    break; 
-                }
-
-                
-                HandleMenuOptionReview(menuOptions[selectedIndex], reviewlist, CustId);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
+        string[] menuOptions = { "Remove Review", "Print Reviews", "Exit" };
+        RunMenu("Review Menu", menuOptions, HandleMenuOptionReview, CustId);
     }
 
-    public static void HandleMenuOptionReview(string selectedOption, List<CustomerReview>reviewlist, int CustId)
+    public static void HandleMenuOptionReview(string selectedOption, int CustId)
     {
         Console.Clear();
         Console.WriteLine($"You selected: {selectedOption}");

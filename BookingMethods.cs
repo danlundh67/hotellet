@@ -208,6 +208,7 @@ public static void PrintBooking(List<Bookings>bookings, List<Customer>customers)
 public static void BookARoom(List<Bookings>bookings, List<Room>rooms, List<Customer>customers)
 {
 
+    Console.CursorVisible = true;
     Customer customer = CustomerMethods.CustomerMakeCustomer(customers);
     System.Console.WriteLine("----------------------------------------");
     bool tempChecked = false;
@@ -251,16 +252,14 @@ public static void BookARoom(List<Bookings>bookings, List<Room>rooms, List<Custo
     {
         while (availrooms.FindIndex(y => y.RoomNr == int.Parse(aroom)) == -1)
         {
-            Console.WriteLine("Wrong room number state again ");
+            Console.WriteLine("Wrong room number try again ");
             aroom=Console.ReadLine()+"";
         }
         Room addedroom = RoomMethods.GetRooms(rooms,int.Parse(aroom));
         customerrooms.Add(addedroom);
-        Console.WriteLine("Add another room to this booking?, state a room number or q to quit ");
+        Console.WriteLine("Add another room to this booking?, state a room number or (q) to quit ");
         aroom=Console.ReadLine()+"";
     }
-    
-    
     
     if (customerrooms.Count()>0)
     {
