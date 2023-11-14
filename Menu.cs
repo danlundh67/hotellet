@@ -128,7 +128,7 @@ public class Menu
 
     public static void RunStaffMenu(int CustId)
     {
-        string[] menuOptions = { "Room utility", "Customer utility", "Booking utility", "Review utility", "Exit" };
+        string[] menuOptions = { "Room utility", "Customer utility", "Booking utility", "Review utility", "All Checked in","Exit" };
         RunMenu("Staff Menu", menuOptions, HandleMenuOptionStaff, CustId);
     }
 
@@ -152,6 +152,10 @@ public class Menu
         else if (selectedOption == "Review utility")
         {
             RunReviewMenu(CustId);
+        }
+        else if (selectedOption == "All Checked in")
+        {
+            Checkin.AllCheckedIn(bookings);
         }
         
         
@@ -216,7 +220,7 @@ public class Menu
 
     public static void RunBookingMenu(int CustId)
     {
-       string[] menuOptions = { "Add Booking", "Remove Booking", "Find Bookings", "Print Booking", "Exit" };
+       string[] menuOptions = { "Add Booking", "Remove Booking", "Find Bookings", "Print Booking", "Customer Checkin/Out", "Exit" };
         RunMenu("Booking Menu", menuOptions, HandleMenuOptionBooking, CustId);
     }
 
@@ -239,6 +243,10 @@ public class Menu
         else if (selectedOption == "Print Booking")
         {
             BookingMethods.PrintBooking(bookings, customers);    
+        }
+        else if (selectedOption == "Customer Checkin/Out")
+        {
+            Checkin.CheckInOut(bookings, customers);    
         }
         
     }

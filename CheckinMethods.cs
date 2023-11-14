@@ -1,6 +1,6 @@
 public class Checkin
 {
-    public void CheckInOut(List<Bookings>bookings, List<Customer>customers)
+    static public void CheckInOut(List<Bookings>bookings, List<Customer>customers)
     {
         List<Bookings> custbook =new List<Bookings>();
         int custid = CustomerMethods.FindMyId(customers);
@@ -19,6 +19,7 @@ public class Checkin
                         if (answ.ToLower()=="y")
                         {
                             a.CheckedInOut = true;
+                            Console.WriteLine($"Customer has checked in");
                         }
 
                     }
@@ -40,6 +41,16 @@ public class Checkin
         else
         {
             Console.WriteLine("Could not find the customer");
+        }
+    }
+
+    static public void AllCheckedIn(List<Bookings>bookings)
+    {
+        List<Bookings> custbook =new List<Bookings>();
+        custbook = bookings.Where(x => x.CheckedInOut == true).ToList();
+        foreach (Bookings a in custbook)
+        {
+            Console.WriteLine($"Customer id {a.Customerid}, {a.DateIn} to {a.DateOut}, number of rooms {a.Bookedrooms.Count()}");
         }
     }
 }
