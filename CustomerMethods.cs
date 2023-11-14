@@ -90,9 +90,9 @@ public class CustomerMethods
                 return myCust[0].customerid;
             }
             else{
-                Console.Write("State email: ");
+                Console.Write("State phone: ");
                 string epost = Console.ReadLine() + "";
-                myCust = myCust.Where(x => x.email == epost).ToList();
+                myCust = myCust.Where(x => x.phone == epost).ToList();
                 PrintCustomer(myCust);
                 if (myCust.Count() == 1)
                 {
