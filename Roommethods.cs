@@ -1,7 +1,7 @@
 class RoomMethods
 {
 
-    
+    // Add a new room ti the list of rooms
     public static void AddRoom(List<Room>rooms)
     {   
             int tmpRoomNr;
@@ -43,6 +43,8 @@ class RoomMethods
             }
 
     }
+
+    // removes a room from the list of rooms
     public static void RemoveRoom(List<Room>rooms)
     {
         Console.WriteLine("Active rooms");
@@ -61,6 +63,9 @@ class RoomMethods
         }
 
     }
+
+    // finds a room in the list of rooms
+
     public static void FindRoom(List<Room>rooms)
     {
         Console.Write("State the room number of the room you want to view: ");
@@ -88,6 +93,7 @@ class RoomMethods
         }
     }
     
+    // print out all of the rooms in the list of rooms
     public static void PrintRooms(List<Room>rooms)
     {
         for (int i = 0; i < rooms.Count; i++)
@@ -105,7 +111,7 @@ class RoomMethods
             Console.WriteLine("-------------------------------------");
         }
     }
-
+    // Method for returning a room (object instance) based on roomnr
     public static Room GetRooms(List<Room>rooms, int roomnr)
     {
         int roomIndex = rooms.FindIndex(y => y.RoomNr == roomnr);

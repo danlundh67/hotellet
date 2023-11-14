@@ -2,9 +2,12 @@ using System.Data;
 
 public class CustomerMethods
 {
+
+    // Add a new Customer
+    // Read the Customer data and add the customer to the list of customers
     static public void AddCustomer(List<Customer> customers)
     {
-        // Read the Customer data and add the customer to the list of customers
+        
         int custId;
         if (customers.Count() < 1)
         {
@@ -33,6 +36,7 @@ public class CustomerMethods
 
     }
 
+    // Removes an existing Customer from the list
     static public void RemoveCustomer(List<Customer> customers)
     {
         // Remove a customer from the list of Customers
@@ -41,6 +45,7 @@ public class CustomerMethods
         customers.RemoveAt(customers.FindIndex(y => y.customerid == custId));
     }
 
+    //  Finds a Customer (using lamda search) and prints out Customer info
     static public void FindCustomer(List<Customer> customers)
     {
         Console.Write("State the Customer id for the customer you want to view: ");
@@ -60,6 +65,8 @@ public class CustomerMethods
             Console.WriteLine($" Customer email: {mycust.email}");
         }
     }
+
+    // Stepwise seach for finding a specific customer
 
     public static int FindMyId(List<Customer> customers)
     {
@@ -100,6 +107,8 @@ public class CustomerMethods
         }
 
     }
+
+    // Search Customer for a specific customer id
     static public void FindCustomer(List<Customer> customers, int custId)
     {
         
@@ -119,6 +128,7 @@ public class CustomerMethods
         }
     }  
 
+    // prints out All Customers and their information
     static public void PrintCustomer(List<Customer> customers)
     {
         Console.WriteLine("------------------------------------------------");
@@ -134,6 +144,8 @@ public class CustomerMethods
             Console.WriteLine("------------------------------------------------");
         }
     }
+
+    // Method for a Customer to add themself to Customers
     static public Customer CustomerMakeCustomer(List<Customer> customers)
     {
         
