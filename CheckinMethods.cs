@@ -57,7 +57,7 @@ public class Checkin
         foreach (Bookings a in custbook)
         {
             CustomerMethods.FindCustomer(customers,a.Customerid);
-            Console.WriteLine($"Customer id {a.Customerid}, {a.DateIn} to {a.DateOut}, number of rooms {a.Bookedrooms.Count()}");
+            Console.WriteLine($"Customer checked in {a.DateIn} to {a.DateOut}, number of rooms {a.Bookedrooms.Count()}");
         }
     }
 }
