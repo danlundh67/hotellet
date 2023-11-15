@@ -15,7 +15,7 @@ public class BookingMethods
         foreach (Room a in rooms)
         {
             Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds}| ");
-            if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
+            if(FindAvailableRoom(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
             {
                 Console.WriteLine(" Available!");
             }
@@ -36,7 +36,7 @@ public class BookingMethods
         
         foreach (Room a in rooms)
         {
-            if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
+            if(FindAvailableRoom(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
             {
                 Room availroom = RoomMethods.GetRooms(rooms,a.RoomNr);
                 availableRooms.Add(availroom);
@@ -147,7 +147,7 @@ public class BookingMethods
     // Checks if a room is available between input dates and check in dates.
     // Returns true if the room is available; otherwise, returns false.
     
-    public static bool FindBooking(List<Bookings>bookings, int RoomNr, DateOnly CustIn, DateOnly CustOut)
+    public static bool FindAvailableRoom(List<Bookings>bookings, int RoomNr, DateOnly CustIn, DateOnly CustOut)
     {
     
         bool available = true;
@@ -175,6 +175,7 @@ public class BookingMethods
         return available;
             
     }
+    // Sorts the list of bookings in ascending order with the first check in date at the top.
     public static List<Bookings> SortBooking(List<Bookings>bookings)
     {
         return bookings.OrderBy(x => x.DateIn).ToList();

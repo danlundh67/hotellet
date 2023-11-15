@@ -18,7 +18,7 @@ public class Bookings
         CheckedInOut = checkedInOut;
         CreditCardNr = creditCardNr;
         Bookedrooms = bookedrooms;
-        this.Customerid = customerid;
+        Customerid = customerid;
         
 
     }
