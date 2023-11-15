@@ -155,7 +155,7 @@ public class Menu
         }
         else if (selectedOption == "All Checked in")
         {
-            Checkin.AllCheckedIn(bookings);
+            Checkin.AllCheckedIn(bookings,customers);
         }
         
         

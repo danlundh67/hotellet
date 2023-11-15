@@ -50,12 +50,13 @@ public class Checkin
     }
 
     // Print all checked in Customers
-    static public void AllCheckedIn(List<Bookings>bookings)
+    static public void AllCheckedIn(List<Bookings>bookings, List<Customer> customers)
     {
         List<Bookings> custbook =new List<Bookings>();
         custbook = bookings.Where(x => x.CheckedInOut == true).ToList();
         foreach (Bookings a in custbook)
         {
+            CustomerMethods.FindCustomer(customers,a.Customerid);
             Console.WriteLine($"Customer id {a.Customerid}, {a.DateIn} to {a.DateOut}, number of rooms {a.Bookedrooms.Count()}");
         }
     }
