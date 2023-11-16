@@ -38,7 +38,7 @@ public class Menu
         Console.Clear();
         Console.WriteLine(prompt);
     }
-    //menuName = name of the menu. menuOptions = array of strings representing the menu options. handleMenuOption = Delegate that will handle the selected menu option. CustId = customer id.
+    // menuName = name of the menu. menuOptions = array of strings representing the menu options. handleMenuOption = Delegate that will handle the selected menu option. CustId = customer id.
     public static void RunMenu(string menuName, string[] menuOptions, Action<string, int> handleMenuOption, int CustId)
 {
     int selectedIndex = 0;
@@ -55,24 +55,24 @@ public class Menu
             Console.WriteLine($"{prefix}{menuOptions[i]}"); // Display menu options with '>' prefix for the selected option
         }
 
-        ConsoleKeyInfo keyInfo = Console.ReadKey(); // Read user input
+        ConsoleKeyInfo keyInfo = Console.ReadKey(); // The information about the pressed key is stored in the keyInfo variable.
 
-        if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0) // Update the selected index based on user input
-        {
+        if (keyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0) // checks if the user pressed the Up Arrow key and if the selected index is greater than 0. If true, it decrease the selectedIndex
+        {                                                           // This allows the user to navigate through the menu options.
             selectedIndex--;
         }
         else if (keyInfo.Key == ConsoleKey.DownArrow && selectedIndex < menuOptions.Length - 1)
         {
             selectedIndex++;
         }
-        else if (keyInfo.Key == ConsoleKey.Enter)
-        {
+        else if (keyInfo.Key == ConsoleKey.Enter) // If the user presses the Enter key, this block is executed. If the selected index corresponds to the "Exit" option, the loop is terminated with break. 
+        {                                         // Otherwise, it invokes the handleMenuOption delegate, passing the selected menu option and CustId as arguments.
             if (selectedIndex == menuOptions.Length - 1)
             {
-                break; // If the user selects "Exit," break out of the loop
+                break; 
             }
 
-            // Invoke the handleMenuOption delegate with the selected option and CustId
+            
             handleMenuOption(menuOptions[selectedIndex], CustId);
 
             Console.WriteLine("Press any key to continue...");
@@ -98,8 +98,8 @@ public class Menu
     public static void RunCustomerMenu(int CustId)
     {
         string[] menuOptions = { "Book a Room", "Available Rooms", "Submit a Review", "Print Reviews", "Exit" };
-
-        RunMenu("Customer Menu", menuOptions, HandleMenuOptionCustomer, CustId);
+        
+        RunMenu("Customer Menu", menuOptions, HandleMenuOptionCustomer, CustId); // Run the menu with the title "Customer Menu" using the provided menu options, a method to handle menu selections, and a customer identifier (CustId) as additional context.
     }
 
     public static void HandleMenuOptionCustomer(string selectedOption, int CustId)
@@ -220,7 +220,7 @@ public class Menu
 
     public static void RunBookingMenu(int CustId)
     {
-       string[] menuOptions = { "Add Booking", "Remove Booking", "Find Bookings", "Print Booking", "Customer Checkin/Out", "Exit" };
+       string[] menuOptions = { "Add Booking", "Remove Booking", "Find Bookings", "Print Booking", "Customer Check in/Out", "Exit" };
         RunMenu("Booking Menu", menuOptions, HandleMenuOptionBooking, CustId);
     }
 
@@ -244,7 +244,7 @@ public class Menu
         {
             BookingMethods.PrintBooking(bookings, customers);    
         }
-        else if (selectedOption == "Customer Checkin/Out")
+        else if (selectedOption == "Customer Check in/Out")
         {
             Checkin.CheckInOut(bookings, customers);    
         }

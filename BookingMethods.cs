@@ -94,6 +94,7 @@ public class BookingMethods
         Console.WriteLine("---------------------------------------------------------------");
         Console.WriteLine("State the room numbers to include in the booking (q = quit): ");
         aroom=Console.ReadLine()+"";
+        // Adds rooms to a booking.
         while (aroom !="q")
         {
             while (availrooms.FindIndex(y => y.RoomNr == int.Parse(aroom)) == -1)
@@ -151,12 +152,13 @@ public class BookingMethods
     {
     
         bool available = true;
-        foreach (Bookings a in bookings)
+        foreach (Bookings a in bookings) // iterate list of bookings
         {
             
-            foreach (Room r in a.Bookedrooms)
-            {
-                if (r.RoomNr == RoomNr)
+            foreach (Room r in a.Bookedrooms) // iterates list of booked rooms in bookings list.
+            {   
+                // Checks if a room is in a booking between input dates from AvailableRooms method.
+                if (r.RoomNr == RoomNr) 
                 {
                     if (CustIn < a.DateOut && CustOut > a.DateIn)
                     {  
@@ -254,6 +256,7 @@ public class BookingMethods
         Console.WriteLine("---------------------------------------------------------------");
         Console.WriteLine("State the room numbers to include in the booking (q = quit): ");
         aroom=Console.ReadLine()+"";
+        // Adds rooms to a booking.
         while (aroom !="q")
         {
             while (availrooms.FindIndex(y => y.RoomNr == int.Parse(aroom)) == -1)

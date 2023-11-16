@@ -39,7 +39,7 @@ public class ReviewMethods
 
     }
 
-    // Removes review from list.
+    // Removes a review from list.
     public static void RemoveReview(int custId, List<CustomerReview> listreviews)
     {
 

@@ -11,12 +11,12 @@ public class Room
 
      public Room (int roomNr, int nrOfBeds, bool hcp, bool silentRoom, bool familyRoom, Diffbeds diffbeds)
      {
-        this.RoomNr = roomNr;
-        this.NrOfBeds = nrOfBeds;
-        this.Hcp = hcp;
-        this.SilentRoom = silentRoom;
-        this.FamilyRoom = familyRoom;
-        this.Diffbeds = diffbeds;
+        RoomNr = roomNr;
+        NrOfBeds = nrOfBeds;
+        Hcp = hcp;
+        SilentRoom = silentRoom;
+        FamilyRoom = familyRoom;
+        Diffbeds = diffbeds;
      }
 }
 public enum Diffbeds
